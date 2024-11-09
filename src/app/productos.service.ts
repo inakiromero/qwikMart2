@@ -15,7 +15,7 @@ export class ProductoService {
     return this.http.get<Producto[]>(this.apiUrl);
   }
 
-  agregarProducto(producto: Producto): Observable<Producto> {
+  agregarProducto(producto: Omit<Producto, 'id'>): Observable<Producto> {
     return this.http.post<Producto>(this.apiUrl, producto);
   }
 
@@ -29,9 +29,10 @@ export class ProductoService {
 
   buscarProductos(criterio: Partial<Producto>): Observable<Producto[]> {
     let params = new HttpParams();
-    if (criterio.id) params = params.set('id', criterio.id.toString());
+    if (criterio.id !== undefined && criterio.id !== null) params = params.set('id', criterio.id.toString());
     if (criterio.nombre) params = params.set('nombre', criterio.nombre);
     if (criterio.categoria) params = params.set('categoria', criterio.categoria);
+
     return this.http.get<Producto[]>(this.apiUrl, { params });
   }
 }

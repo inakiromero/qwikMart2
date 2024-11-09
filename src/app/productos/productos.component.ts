@@ -20,49 +20,51 @@ export class ProductoComponent implements OnInit {
   }
 
   listarProductos() {
-    this.productoService.obtenerProductos().subscribe(
-      (productos) => (this.productos = productos),
-      (error) => console.error('Error al obtener productos:', error)
-    );
+    this.productoService.obtenerProductos().subscribe({
+      next: (productos) => this.productos = productos,
+      error: (error) => console.error('Error al obtener productos:', error)
+    });
   }
 
   agregarProducto() {
-    // Clonamos el producto sin el campo `id` para dejar que el backend genere uno nuevo
-    const nuevoProducto = { ...this.producto };
+    const { id, ...nuevoProducto } = this.producto; // Excluir `id` del nuevo producto
   
-    this.productoService.agregarProducto(nuevoProducto).subscribe(
-      (productoCreado) => {
-        this.listarProductos(); // Actualiza la lista de productos
-        this.resetForm(); // Limpia el formulario después de agregar
+    this.productoService.agregarProducto(nuevoProducto).subscribe({
+      next: (productoCreado) => {
+        this.productos.push(productoCreado);  // Agrega el producto creado con el ID asignado por el backend
+        this.resetForm();
       },
-      (error) => console.error('Error al agregar producto:', error)
-    );
+      error: (error) => console.error('Error al agregar producto:', error),
+    });
   }
   modificarProducto() {
-    if (this.producto.id) {
-      this.productoService.modificarProducto(this.producto.id, this.producto).subscribe(
-        () => this.listarProductos(),
-        (error) => console.error('Error al modificar producto:', error)
-      );
+    if (this.producto.id && this.producto.id > 0) {
+      this.productoService.modificarProducto(this.producto.id, this.producto).subscribe({
+        next: () => this.listarProductos(),
+        error: (error) => console.error('Error al modificar producto:', error)
+      });
     } else {
-      console.error('Error: El producto debe tener un ID para ser modificado.');
+      console.error('Error: El producto debe tener un ID válido para ser modificado.');
     }
   }
-
+  
   eliminarProducto(id: number) {
-    this.productoService.eliminarProducto(id).subscribe(
-      () => this.listarProductos(),
-      (error) => console.error('Error al eliminar producto:', error)
-    );
+    this.productoService.eliminarProducto(id).subscribe({
+      next: () => this.listarProductos(),
+      error: (error) => console.error('Error al eliminar producto:', error)
+    });
   }
-
+  
   buscarProductos() {
-    this.productoService.buscarProductos(this.criterioBusqueda).subscribe(
-      (productos) => (this.productos = productos),
-      (error) => console.error('Error al buscar productos:', error)
-    );
+    this.productoService.buscarProductos(this.criterioBusqueda).subscribe({
+      next: (productos) => {
+        this.productos = productos;
+        this.criterioBusqueda = { id: undefined, nombre: '', categoria: '' };
+      },
+      error: (error) => console.error('Error al buscar productos:', error)
+    });
   }
-
+  
   resetForm() {
     this.producto = { id: 0, nombre: '', categoria: '', precio: 0, stock: 0 };
   }

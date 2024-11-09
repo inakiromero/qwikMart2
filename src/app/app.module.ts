@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ProductoComponent } from './productos/productos.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http'; 
 
 const routes: Routes = [
   { path: '', redirectTo: '/productos', pathMatch: 'full' },
@@ -17,11 +17,10 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes) 
   ],
-  providers: [],
+  providers: [provideHttpClient(withFetch()) ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

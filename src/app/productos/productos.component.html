@@ -1,7 +1,7 @@
 <div class="container">
     <h2>Sistema de Gestión de Productos</h2>
   
-    <!-- Formulario para agregar/modificar producto -->
+    
     <form (ngSubmit)="agregarProducto()">
       <h3>{{ producto.id ? 'Modificar Producto' : 'Agregar Producto' }}</h3>
   
@@ -33,7 +33,6 @@
   
     <hr />
   
-    <!-- Formulario de búsqueda de productos -->
     <h3>Buscar Productos</h3>
     <div class="form-group">
       <label for="criterio-id">Buscar por ID:</label>
@@ -55,7 +54,6 @@
   
     <hr />
   
-    <!-- Tabla de productos -->
     <h3>Listado de Productos</h3>
     <table class="table table-bordered">
       <thead>
