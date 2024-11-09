@@ -1,0 +1,85 @@
+<div class="container">
+    <h2>Sistema de Gestión de Productos</h2>
+  
+    <!-- Formulario para agregar/modificar producto -->
+    <form (ngSubmit)="agregarProducto()">
+      <h3>{{ producto.id ? 'Modificar Producto' : 'Agregar Producto' }}</h3>
+  
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="producto.nombre" name="nombre" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria" [(ngModel)]="producto.categoria" name="categoria" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" [(ngModel)]="producto.precio" name="precio" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" [(ngModel)]="producto.stock" name="stock" required />
+      </div>
+  
+      <button type="submit" class="btn btn-primary">
+        {{ producto.id ? 'Guardar Cambios' : 'Agregar Producto' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancelar</button>
+    </form>
+  
+    <hr />
+  
+    <!-- Formulario de búsqueda de productos -->
+    <h3>Buscar Productos</h3>
+    <div class="form-group">
+      <label for="criterio-id">Buscar por ID:</label>
+      <input type="number" id="criterio-id" [(ngModel)]="criterioBusqueda.id" name="criterio-id" />
+    </div>
+  
+    <div class="form-group">
+      <label for="criterio-nombre">Buscar por Nombre:</label>
+      <input type="text" id="criterio-nombre" [(ngModel)]="criterioBusqueda.nombre" name="criterio-nombre" />
+    </div>
+  
+    <div class="form-group">
+      <label for="criterio-categoria">Buscar por Categoría:</label>
+      <input type="text" id="criterio-categoria" [(ngModel)]="criterioBusqueda.categoria" name="criterio-categoria" />
+    </div>
+  
+    <button (click)="buscarProductos()" class="btn btn-info">Buscar</button>
+    <button (click)="listarProductos()" class="btn btn-secondary">Limpiar Búsqueda</button>
+  
+    <hr />
+  
+    <!-- Tabla de productos -->
+    <h3>Listado de Productos</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of productos">
+          <td>{{ prod.id }}</td>
+          <td>{{ prod.nombre }}</td>
+          <td>{{ prod.categoria }}</td>
+          <td>{{ prod.precio | currency }}</td>
+          <td>{{ prod.stock }}</td>
+          <td>
+            <button (click)="modificarProducto()" class="btn btn-warning">Editar</button>
+            <button (click)="eliminarProducto(prod.id)" class="btn btn-danger">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

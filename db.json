@@ -1,0 +1,60 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Producto 1",
+      "categoria": "Categoría 1",
+      "precio": 100,
+      "stock": 10
+    },
+    {
+      "id": 2,
+      "nombre": "Producto 2",
+      "categoria": "Categoría 2",
+      "precio": 200,
+      "stock": 5
+    },
+    {
+      "id": 0,
+      "nombre": "amanda",
+      "categoria": "yerba",
+      "precio": 2000,
+      "stock": 20
+    },
+    {
+      "id": 0,
+      "nombre": "taragui",
+      "categoria": "yerba",
+      "precio": 2000,
+      "stock": 20
+    },
+    {
+      "id": 0,
+      "nombre": "coca  cola",
+      "categoria": "gaseosa",
+      "precio": 700,
+      "stock": 200
+    },
+    {
+      "id": 0,
+      "nombre": "pepas",
+      "categoria": "galletitas",
+      "precio": 700,
+      "stock": 50
+    },
+    {
+      "id": 0,
+      "nombre": "oreo",
+      "categoria": "galletitas",
+      "precio": 700,
+      "stock": 50
+    },
+    {
+      "id": 0,
+      "nombre": "tody",
+      "categoria": "galletitas",
+      "precio": 500,
+      "stock": 100
+    }
+  ]
+}
