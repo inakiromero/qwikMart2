@@ -1,18 +1,11 @@
 {
   "productos": [
     {
-      "id": 0,
-      "nombre": "fernet",
+      "id": "ce0d",
+      "nombre": "fernet branca",
       "categoria": "alcohol",
-      "precio": 1000,
+      "precio": 10000,
       "stock": 10
-    },
-    {
-      "id": 0,
-      "nombre": "tang",
-      "categoria": "bebida",
-      "precio": 300,
-      "stock": 20
     }
   ]
 }

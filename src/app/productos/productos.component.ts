@@ -10,6 +10,8 @@ import { Producto } from './producto.model';
 export class ProductoComponent implements OnInit {
   productos: Producto[] = [];
   producto: Producto = { id: 0, nombre: '', categoria: '', precio: 0, stock: 0 };
+  productoSeleccionado: Producto | null = null;
+
 
   criterioBusqueda: Partial<Producto> = { id: undefined, nombre: '', categoria: '' };
 
@@ -37,14 +39,19 @@ export class ProductoComponent implements OnInit {
       error: (error) => console.error('Error al agregar producto:', error),
     });
   }
-  modificarProducto() {
-    if (this.producto.id && this.producto.id > 0) {
-      this.productoService.modificarProducto(this.producto.id, this.producto).subscribe({
-        next: () => this.listarProductos(),
-        error: (error) => console.error('Error al modificar producto:', error)
+  abrirModalEditar(producto: Producto) {
+    this.productoSeleccionado = { ...producto }; // Clona el producto para evitar mutaciones accidentales
+  }
+
+  guardarCambios() {
+    if (this.productoSeleccionado) {
+      this.productoService.modificarProducto(this.productoSeleccionado.id, this.productoSeleccionado).subscribe({
+        next: () => {
+          this.listarProductos();
+          this.cerrarModal();
+        },
+        error: (error) => console.error('Error al modificar producto:', error),
       });
-    } else {
-      console.error('Error: El producto debe tener un ID válido para ser modificado.');
     }
   }
   
@@ -54,7 +61,9 @@ export class ProductoComponent implements OnInit {
       error: (error) => console.error('Error al eliminar producto:', error)
     });
   }
-  
+  cerrarModal() {
+    this.productoSeleccionado = null;
+  }
   buscarProductos() {
     this.productoService.buscarProductos(this.criterioBusqueda).subscribe({
       next: (productos) => {
