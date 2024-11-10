@@ -1,11 +1,3 @@
 {
-  "productos": [
-    {
-      "id": "ce0d",
-      "nombre": "fernet branca",
-      "categoria": "alcohol",
-      "precio": 10000,
-      "stock": 10
-    }
-  ]
+  "productos": []
 }

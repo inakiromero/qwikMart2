@@ -1,0 +1,23 @@
+<div>
+    <h2>Realizar Venta</h2>
+    <input type="text" placeholder="Buscar Producto por ID o Nombre" #inputBusqueda />
+    <button (click)="buscarProducto(inputBusqueda.value)">Buscar</button>
+  
+    <h3>Productos en la Venta</h3>
+    <table>
+      <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Total</th>
+      </tr>
+      <tr *ngFor="let item of ventaItems">
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.precio | currency }}</td>
+        <td>{{ item.cantidad }}</td>
+        <td>{{ item.precio * item.cantidad | currency }}</td>
+      </tr>
+    </table>
+    <button (click)="procesarVenta()">Procesar Venta</button>
+  </div>
+  

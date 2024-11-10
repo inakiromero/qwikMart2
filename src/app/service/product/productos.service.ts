@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Producto } from './productos/producto.model';
+import { Producto } from '../../productos/producto.model';
+import { VentaItem } from '../../ventas/venta.model'; // Importar modelo de venta
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,27 @@ export class ProductoService {
     if (criterio.categoria) params = params.set('categoria', criterio.categoria);
 
     return this.http.get<Producto[]>(this.apiUrl, { params });
+  }
+  actualizarStock(id: number, cantidadVendida: number): Observable<Producto> {
+    return this.http.patch<Producto>(`${this.apiUrl}/${id}`, { cantidadVendida });
+  }
+
+  generarComprobante(ventaItems: VentaItem[]): string {
+    let total = 0;
+    let comprobante = `Comprobante de Venta\n\n`;
+
+    comprobante += 'Código\tNombre\tPrecio\tCantidad\tSubtotal\n';
+    comprobante += '------------------------------------------------\n';
+
+    ventaItems.forEach(item => {
+      const subtotal = item.precio * item.cantidad;
+      total += subtotal;
+      comprobante += `${item.id}\t${item.nombre}\t$${item.precio.toFixed(2)}\t${item.cantidad}\t$${subtotal.toFixed(2)}\n`;
+    });
+
+    comprobante += '------------------------------------------------\n';
+    comprobante += `Total: $${total.toFixed(2)}\n`;
+
+    return comprobante;
   }
 }
