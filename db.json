@@ -1,3 +1,32 @@
 {
-  "productos": []
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Producto 1",
+      "categoria": "Categoría A",
+      "precio": 100,
+      "stock": 20
+    },
+    {
+      "id": 2,
+      "nombre": "Producto 2",
+      "categoria": "Categoría B",
+      "precio": 150,
+      "stock": 15
+    },
+    {
+      "id": 3,
+      "nombre": "tang",
+      "categoria": "bebida",
+      "precio": 500,
+      "stock": 20
+    },
+    {
+      "id": "16a6",
+      "nombre": "pepitas",
+      "categoria": "galletitas",
+      "precio": 2000,
+      "stock": 20
+    }
+  ]
 }

@@ -28,19 +28,25 @@ export class ProductoComponent implements OnInit {
     });
   }
 
-  agregarProducto() {
-    const { id, ...nuevoProducto } = this.producto; // Excluir `id` del nuevo producto
+  private generarIdUnico(): number {
+    return Date.now(); 
+  }
   
+  agregarProducto() {
+      this.producto.id = this.generarIdUnico();
+    
+    
+    const { id, ...nuevoProducto } = this.producto; 
     this.productoService.agregarProducto(nuevoProducto).subscribe({
       next: (productoCreado) => {
-        this.productos.push(productoCreado);  // Agrega el producto creado con el ID asignado por el backend
+        this.productos.push(productoCreado);
         this.resetForm();
       },
       error: (error) => console.error('Error al agregar producto:', error),
     });
   }
   abrirModalEditar(producto: Producto) {
-    this.productoSeleccionado = { ...producto }; // Clona el producto para evitar mutaciones accidentales
+    this.productoSeleccionado = { ...producto }; 
   }
 
   guardarCambios() {

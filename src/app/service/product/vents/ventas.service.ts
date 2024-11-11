@@ -15,7 +15,7 @@ export class VentasService {
 
     items.forEach(item => {
       total += item.precio * item.cantidad;
-      this.productoService.modificarProducto(item.id, { stock: -item.cantidad }).subscribe(); // Actualizar stock
+      this.productoService.modificarProducto(item.id, { stock: -item.cantidad }).subscribe(); 
     });
 
     const venta: Venta = { items, total, fecha: new Date() };

@@ -17,15 +17,15 @@ export class VentasComponent {
   constructor(private productoService: ProductoService, private ventasService: VentasService) {}
 
   buscarProducto(id: number | string): void {
-    this.productoService.buscarProductos({ id: +id }).subscribe(
-      productos => {
-        if (productos.length) {
+    this.productoService.buscarProductos({ id: +id }).subscribe({
+      next: productos => {
+        if (productos.length > 0) {
           const producto = productos[0];
           this.agregarProductoAVenta(producto);
         }
       },
-      error => console.error("Error al buscar producto", error)
-    );
+      error: error => console.error("Error al buscar producto", error),
+    });
   }
 
   agregarProductoAVenta(producto: Producto): void {
