@@ -1,35 +1,51 @@
 <div class="container">
-    <h2>Sistema de Gestión de Productos</h2>
+  <h2>Sistema de Gestión de Productos</h2>
+
+  <form (ngSubmit)="agregarProducto()">
+    <h3>{{ producto.id ? 'Modificar Producto' : 'Agregar Producto' }}</h3>
   
-    
-    <form (ngSubmit)="agregarProducto()">
-      <h3>{{ producto.id ? 'Modificar Producto' : 'Agregar Producto' }}</h3>
-  
-      <div class="form-group">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" [(ngModel)]="producto.nombre" name="nombre" required />
+    <div class="form-group">
+      <label for="id">ID:</label>
+      <input
+        type="number"
+        id="id"
+        [(ngModel)]="producto.id"
+        name="id"
+        required
+        min="1"
+        #idInput="ngModel"
+      />
+      <div *ngIf="idInput.invalid && idInput.touched" class="text-danger">
+        El ID debe ser un número positivo.
       </div>
+    </div>
   
-      <div class="form-group">
-        <label for="categoria">Categoría:</label>
-        <input type="text" id="categoria" [(ngModel)]="producto.categoria" name="categoria" required />
-      </div>
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="producto.nombre" name="nombre" required />
+    </div>
   
-      <div class="form-group">
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" [(ngModel)]="producto.precio" name="precio" required />
-      </div>
+    <div class="form-group">
+      <label for="categoria">Categoría:</label>
+      <input type="text" id="categoria" [(ngModel)]="producto.categoria" name="categoria" required />
+    </div>
   
-      <div class="form-group">
-        <label for="stock">Stock:</label>
-        <input type="number" id="stock" [(ngModel)]="producto.stock" name="stock" required />
-      </div>
+    <div class="form-group">
+      <label for="precio">Precio:</label>
+      <input type="number" id="precio" [(ngModel)]="producto.precio" name="precio" required min="0.01" />
+    </div>
   
-      <button type="submit" class="btn btn-primary">
-        {{ producto.id ? 'Guardar Cambios' : 'Agregar Producto' }}
-      </button>
-      <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancelar</button>
-    </form>
+    <div class="form-group">
+      <label for="stock">Stock:</label>
+      <input type="number" id="stock" [(ngModel)]="producto.stock" name="stock" required min="0" />
+    </div>
+  
+    <button type="submit" class="btn btn-primary">
+      {{ producto.id ? 'Guardar Cambios' : 'Agregar Producto' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancelar</button>
+  </form>
+
   
     <hr />
   

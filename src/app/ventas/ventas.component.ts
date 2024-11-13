@@ -1,6 +1,6 @@
 // ventas.component.ts
 import { Component } from '@angular/core';
-import { ProductoService } from '../service/product/productos.service';
+import { ProductoService } from '../service/product/product/productos.service';
 import { VentasService } from '../service/product/vents/ventas.service';
 import { Producto } from '../productos/producto.model';
 import { VentaItem } from './venta.model';
@@ -27,6 +27,13 @@ export class VentasComponent {
       error: error => console.error("Error al buscar producto", error),
     });
   }
+  quitarProductoDeVenta(item: VentaItem): void {
+    const index = this.ventaItems.findIndex(i => i.id === item.id);
+    if (index !== -1) {
+      this.ventaItems.splice(index, 1);
+    }
+  }
+
 
   agregarProductoAVenta(producto: Producto): void {
     const itemExistente = this.ventaItems.find(item => item.id === producto.id);
@@ -38,9 +45,28 @@ export class VentasComponent {
   }
 
   procesarVenta(): void {
-    this.ventasService.registrarVenta(this.ventaItems).subscribe(venta => {
-      console.log('Venta realizada:', venta);
-      this.ventaItems = []; // Limpiar la lista de la venta después de realizar la venta
+    this.ventaItems.forEach(item => {
+      const producto = this.productos.find(p => p.id === item.id);
+      if (producto) {
+        const nuevoStock = producto.stock - item.cantidad;
+
+        if (nuevoStock >= 0) {  // Verificar que el stock no sea negativo
+          this.productoService.actualizarStock(producto.id, nuevoStock).subscribe({
+            next: () => console.log(`Stock actualizado para producto ${producto.nombre}`),
+            error: error => console.error(`Error al actualizar stock para ${producto.nombre}:`, error)
+          });
+        } else {
+          console.warn(`Stock insuficiente para ${producto.nombre}`);
+        }
+      }
+    });
+
+    this.ventasService.registrarVenta(this.ventaItems).subscribe({
+      next: venta => {
+        console.log('Venta realizada:', venta);
+        this.ventaItems = [];
+      },
+      error: error => console.error('Error al registrar la venta:', error)
     });
   }
 }

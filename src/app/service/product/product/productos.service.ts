@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Producto } from '../../productos/producto.model';
-import { VentaItem } from '../../ventas/venta.model';
+import { Producto } from '../../../productos/producto.model';
+import { VentaItem } from '../../../ventas/venta.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +16,8 @@ export class ProductoService {
     return this.http.get<Producto[]>(this.apiUrl);
   }
 
-  agregarProducto(producto: Omit<Producto, 'id'>): Observable<Producto> {
-    return this.http.post<Producto>(this.apiUrl, producto).pipe(
-      map(productoCreado => ({
-        ...productoCreado,
-        id: Number(productoCreado.id) 
-      }))
-    );
+  agregarProducto(producto: Producto): Observable<Producto> {
+    return this.http.post<Producto>(this.apiUrl, producto);
   }
 
   modificarProducto(id: number, datosActualizados: Partial<Producto>): Observable<Producto> {
@@ -42,7 +37,7 @@ export class ProductoService {
     return this.http.get<Producto[]>(this.apiUrl, { params });
   }
   actualizarStock(id: number, cantidadVendida: number): Observable<Producto> {
-    return this.http.put<Producto>(`${this.apiUrl}/${id}`, { cantidadVendida });
+    return this.http.patch<Producto>(`${this.apiUrl}/${id}`, { cantidadVendida });
   }
 
   generarComprobante(ventaItems: VentaItem[]): string {

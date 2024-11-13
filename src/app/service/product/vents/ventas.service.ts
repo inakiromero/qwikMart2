@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ProductoService } from '../productos.service';
+import { ProductoService } from '../product/productos.service';
 import { Venta, VentaItem } from '../../../ventas/venta.model';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductoService } from '../service/product/productos.service';
+import { ProductoService } from '../service/product/product/productos.service';
 import { Producto } from './producto.model';
 
 @Component({
@@ -28,22 +28,28 @@ export class ProductoComponent implements OnInit {
     });
   }
 
-  private generarIdUnico(): number {
-    return Date.now(); 
-  }
   
   agregarProducto() {
-      this.producto.id = this.generarIdUnico();
-    
-    
-    const { id, ...nuevoProducto } = this.producto; 
-    this.productoService.agregarProducto(nuevoProducto).subscribe({
-      next: (productoCreado) => {
-        this.productos.push(productoCreado);
-        this.resetForm();
-      },
-      error: (error) => console.error('Error al agregar producto:', error),
-    });
+    if (this.formularioValido()) {
+      this.productoService.agregarProducto(this.producto).subscribe({
+        next: (productoCreado) => {
+          this.productos.push(productoCreado);
+          this.resetForm();
+        },
+        error: (error) => console.error('Error al agregar producto:', error),
+      });
+    } else {
+      console.error('Error: Complete todos los campos correctamente.');
+    }
+  }
+  formularioValido(): boolean {
+    return (
+      this.producto.id > 0 &&
+      this.producto.nombre.trim() !== '' &&
+      this.producto.categoria.trim() !== '' &&
+      this.producto.precio > 0 &&
+      this.producto.stock >= 0
+    );
   }
   abrirModalEditar(producto: Producto) {
     this.productoSeleccionado = { ...producto }; 

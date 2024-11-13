@@ -22,11 +22,18 @@
       "stock": 20
     },
     {
-      "id": "16a6",
+      "id": 4,
       "nombre": "pepitas",
       "categoria": "galletitas",
       "precio": 2000,
       "stock": 20
+    },
+    {
+      "id": 5,
+      "nombre": "fernet branca",
+      "categoria": "alcohol",
+      "precio": 1000,
+      "stock": 10
     }
   ]
 }
