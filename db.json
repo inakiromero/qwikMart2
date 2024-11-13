@@ -2,16 +2,16 @@
   "productos": [
     {
       "id": 1,
-      "nombre": "Producto 1",
-      "categoria": "Categoría A",
-      "precio": 100,
+      "nombre": "bimbo 330g",
+      "categoria": "pan ",
+      "precio": 300,
       "stock": 20
     },
     {
       "id": 2,
-      "nombre": "Producto 2",
-      "categoria": "Categoría B",
-      "precio": 150,
+      "nombre": "nuttela 500g",
+      "categoria": "chocolate",
+      "precio": 1500,
       "stock": 15
     },
     {
@@ -25,7 +25,7 @@
       "id": 4,
       "nombre": "pepitas",
       "categoria": "galletitas",
-      "precio": 2000,
+      "precio": 200,
       "stock": 20
     },
     {

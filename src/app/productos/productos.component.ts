@@ -23,12 +23,11 @@ export class ProductoComponent implements OnInit {
 
   listarProductos() {
     this.productoService.obtenerProductos().subscribe({
-      next: (productos) => this.productos = productos,
+      next: (productos) => (this.productos = productos),
       error: (error) => console.error('Error al obtener productos:', error)
     });
   }
 
-  
   agregarProducto() {
     if (this.formularioValido()) {
       this.productoService.agregarProducto(this.producto).subscribe({
@@ -42,6 +41,7 @@ export class ProductoComponent implements OnInit {
       console.error('Error: Complete todos los campos correctamente.');
     }
   }
+
   formularioValido(): boolean {
     return (
       this.producto.id > 0 &&
@@ -51,6 +51,7 @@ export class ProductoComponent implements OnInit {
       this.producto.stock >= 0
     );
   }
+  
   abrirModalEditar(producto: Producto) {
     this.productoSeleccionado = { ...producto }; 
   }

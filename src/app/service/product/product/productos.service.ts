@@ -37,7 +37,7 @@ export class ProductoService {
     return this.http.get<Producto[]>(this.apiUrl, { params });
   }
   actualizarStock(id: number, cantidadVendida: number): Observable<Producto> {
-    return this.http.patch<Producto>(`${this.apiUrl}/${id}`, { cantidadVendida });
+    return this.http.patch<Producto>(`${this.apiUrl}/${id}`, {  stock:cantidadVendida });
   }
 
   generarComprobante(ventaItems: VentaItem[]): string {

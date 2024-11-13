@@ -1,46 +1,97 @@
 <div class="container">
   <h2>Sistema de Gestión de Productos</h2>
 
-  <form (ngSubmit)="agregarProducto()">
+  <form (ngSubmit)="agregarProducto()" #productoForm="ngForm">
     <h3>{{ producto.id ? 'Modificar Producto' : 'Agregar Producto' }}</h3>
-  
+
     <div class="form-group">
       <label for="id">ID:</label>
-      <input
-        type="number"
-        id="id"
-        [(ngModel)]="producto.id"
-        name="id"
-        required
-        min="1"
-        #idInput="ngModel"
+      <input 
+        type="number" 
+        id="id" 
+        [(ngModel)]="producto.id" 
+        name="id" 
+        required 
+        min="1" 
+        #id="ngModel" 
+        class="form-control" 
       />
-      <div *ngIf="idInput.invalid && idInput.touched" class="text-danger">
-        El ID debe ser un número positivo.
+      <div *ngIf="id.invalid && id.touched" class="text-danger">
+        El ID es obligatorio y debe ser un número positivo.
       </div>
     </div>
-  
+
     <div class="form-group">
       <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" [(ngModel)]="producto.nombre" name="nombre" required />
+      <input 
+        type="text" 
+        id="nombre" 
+        [(ngModel)]="producto.nombre" 
+        name="nombre" 
+        required 
+        #nombre="ngModel" 
+        class="form-control" 
+      />
+      <div *ngIf="nombre.invalid && nombre.touched" class="text-danger">
+        El nombre es obligatorio.
+      </div>
     </div>
-  
+
     <div class="form-group">
       <label for="categoria">Categoría:</label>
-      <input type="text" id="categoria" [(ngModel)]="producto.categoria" name="categoria" required />
+      <input 
+        type="text" 
+        id="categoria" 
+        [(ngModel)]="producto.categoria" 
+        name="categoria" 
+        required 
+        #categoria="ngModel" 
+        class="form-control" 
+      />
+      <div *ngIf="categoria.invalid && categoria.touched" class="text-danger">
+        La categoría es obligatoria.
+      </div>
     </div>
-  
+
     <div class="form-group">
       <label for="precio">Precio:</label>
-      <input type="number" id="precio" [(ngModel)]="producto.precio" name="precio" required min="0.01" />
+      <input 
+        type="number" 
+        id="precio" 
+        [(ngModel)]="producto.precio" 
+        name="precio" 
+        required 
+        min="0.01" 
+        #precio="ngModel" 
+        class="form-control" 
+      />
+      <div *ngIf="precio.invalid && precio.touched" class="text-danger">
+        El precio es obligatorio y debe ser mayor a 0.
+      </div>
     </div>
-  
+
     <div class="form-group">
       <label for="stock">Stock:</label>
-      <input type="number" id="stock" [(ngModel)]="producto.stock" name="stock" required min="0" />
+      <input 
+        type="number" 
+        id="stock" 
+        [(ngModel)]="producto.stock" 
+        name="stock" 
+        required 
+        min="1" 
+        #stock="ngModel" 
+        class="form-control" 
+      />
+      <div *ngIf="stock.invalid && stock.touched" class="text-danger">
+        El stock es obligatorio y debe ser al menos 1.
+      </div>
     </div>
-  
-    <button type="submit" class="btn btn-primary">
+
+    <button 
+      type="submit" 
+      class="btn btn-primary" 
+      [disabled]="productoForm.invalid"
+    >
       {{ producto.id ? 'Guardar Cambios' : 'Agregar Producto' }}
     </button>
     <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancelar</button>
