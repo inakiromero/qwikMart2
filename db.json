@@ -1,39 +1,46 @@
 {
   "productos": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "bimbo 330g",
       "categoria": "pan ",
       "precio": 300,
-      "stock": 20
+      "stock": -1
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "nuttela 500g",
       "categoria": "chocolate",
       "precio": 1500,
       "stock": 15
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "tang",
       "categoria": "bebida",
       "precio": 500,
       "stock": 20
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "pepitas",
       "categoria": "galletitas",
       "precio": 200,
       "stock": 20
     },
     {
-      "id": 5,
+      "id": "5",
       "nombre": "fernet branca",
       "categoria": "alcohol",
-      "precio": 1000,
-      "stock": 10
+      "precio": 10000,
+      "stock": -1
+    },
+    {
+      "id": "6",
+      "nombre": "tody",
+      "categoria": "galletita",
+      "precio": 800,
+      "stock": 8
     }
   ]
 }

@@ -16,15 +16,21 @@ export class VentasComponent {
 
   constructor(private productoService: ProductoService, private ventasService: VentasService) {}
 
-  buscarProducto(id: number | string): void {
-    this.productoService.buscarProductos({ id: +id }).subscribe({
+  buscarProducto(valorBusqueda: string): void {
+    const criterio = isNaN(Number(valorBusqueda))
+      ? { nombre: valorBusqueda } 
+      : { id: +valorBusqueda };
+  
+    this.productoService.buscarProductos(criterio).subscribe({
       next: productos => {
         if (productos.length > 0) {
           const producto = productos[0];
           this.agregarProductoAVenta(producto);
+        } else {
+          console.log('Producto no encontrado');
         }
       },
-      error: error => console.error("Error al buscar producto", error),
+      error: error => console.error('Error al buscar producto:', error)
     });
   }
   quitarProductoDeVenta(item: VentaItem): void {
@@ -45,26 +51,10 @@ export class VentasComponent {
   }
 
   procesarVenta(): void {
-    this.ventaItems.forEach(item => {
-      const producto = this.productos.find(p => p.id === item.id);
-      if (producto) {
-        const nuevoStock = producto.stock - item.cantidad;
-
-        if (nuevoStock >= 0) {  // Verificar que el stock no sea negativo
-          this.productoService.actualizarStock(producto.id, nuevoStock).subscribe({
-            next: () => console.log(`Stock actualizado para producto ${producto.nombre}`),
-            error: error => console.error(`Error al actualizar stock para ${producto.nombre}:`, error)
-          });
-        } else {
-          console.warn(`Stock insuficiente para ${producto.nombre}`);
-        }
-      }
-    });
-
     this.ventasService.registrarVenta(this.ventaItems).subscribe({
       next: venta => {
         console.log('Venta realizada:', venta);
-        this.ventaItems = [];
+        this.ventaItems = []; // Limpiar los items después de la venta
       },
       error: error => console.error('Error al registrar la venta:', error)
     });
