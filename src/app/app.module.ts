@@ -7,11 +7,13 @@ import { ProductoComponent } from './productos/productos.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { VentasComponent } from './ventas/ventas.component';
 import { NavbarComponent } from './navbar/navbar.component'; 
+import{ProveedoresComponent} from './proveedores/proveedores.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/productos', pathMatch: 'full' },
   { path: 'productos', component: ProductoComponent },
-  { path: 'ventas', component: VentasComponent } // Agrega esta ruta para Ventas
+  { path: 'ventas', component: VentasComponent }, 
+  {path: 'proveedores', component: ProveedoresComponent}
 ];
 
 @NgModule({
@@ -19,7 +21,9 @@ const routes: Routes = [
     AppComponent,
     ProductoComponent,
     VentasComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProveedoresComponent
+
   ],
   imports: [
     BrowserModule,
