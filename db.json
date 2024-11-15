@@ -5,7 +5,7 @@
       "nombre": "bimbo 330g",
       "categoria": "pan ",
       "precio": 300,
-      "stock": -1
+      "stock": 20
     },
     {
       "id": "2",
@@ -33,7 +33,7 @@
       "nombre": "fernet branca",
       "categoria": "alcohol",
       "precio": 10000,
-      "stock": -1
+      "stock": 10
     },
     {
       "id": "6",
