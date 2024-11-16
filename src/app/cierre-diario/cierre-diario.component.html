@@ -1,0 +1,33 @@
+<div>
+    <h2>Cierre Diario</h2>
+    <p>Fecha: {{ fechaHoy }}</p>
+  
+    <div *ngIf="ventasDelDia.length > 0; else noVentas">
+      <h3>Desglose de Ventas por Producto</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad Vendida</th>
+            <th>Ingresos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of desglosePorProducto | keyvalue">
+            <td>{{ producto.key }}</td>
+            <td>{{ producto.value.cantidad }}</td>
+            <td>{{ producto.value.ingresos | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <h3>Total Ingresos: {{ totalIngresos | currency }}</h3>
+  
+      <button (click)="exportarPDF()">Exportar PDF</button>
+    </div>
+  
+    <ng-template #noVentas>
+      <p>No hay ventas registradas para el día de hoy.</p>
+    </ng-template>
+  </div>
+  

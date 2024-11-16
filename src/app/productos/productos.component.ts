@@ -11,7 +11,8 @@ export class ProductoComponent implements OnInit {
   productos: Producto[] = [];
   producto: Producto = { id: 0, nombre: '', categoria: '', precio: 0, stock: 0 };
   productoSeleccionado: Producto | null = null;
-
+  limiteMinimoStock = 6; 
+  productosConStockBajo: Producto[] = [];
 
   criterioBusqueda: Partial<Producto> = { id: undefined, nombre: '', categoria: '' };
 
@@ -23,7 +24,10 @@ export class ProductoComponent implements OnInit {
 
   listarProductos() {
     this.productoService.obtenerProductos().subscribe({
-      next: (productos) => (this.productos = productos),
+      next: (productos) => {
+        this.productos = productos
+        this.verificarStockBajo();
+      },
       error: (error) => console.error('Error al obtener productos:', error)
     });
   }
@@ -39,6 +43,15 @@ export class ProductoComponent implements OnInit {
       });
     } else {
       console.error('Error: Complete todos los campos correctamente.');
+    }
+  }
+  verificarStockBajo() {
+    this.productosConStockBajo = this.productos.filter(
+      (producto) => producto.stock < this.limiteMinimoStock
+    );
+
+    if (this.productosConStockBajo.length > 0) {
+      console.warn('Productos con stock bajo:', this.productosConStockBajo);
     }
   }
 
@@ -89,5 +102,27 @@ export class ProductoComponent implements OnInit {
   
   resetForm() {
     this.producto = { id: 0, nombre: '', categoria: '', precio: 0, stock: 0 };
+  }
+
+  productoId: number = 0;
+ cantidadStock: number = 0;
+  cargarStock() {
+    if (this.productoId && this.cantidadStock > 0) {
+      this.productoService.obtenerProductoPorId(this.productoId).subscribe({
+        next: (producto) => {
+          const nuevoStock = producto.stock + this.cantidadStock;
+          this.productoService.actualizarStock(this.productoId, nuevoStock).subscribe({
+            next: () => {
+              console.log(`Stock actualizado para el producto ID ${this.productoId}`);
+              this.listarProductos(); // Refrescar la lista de productos
+            },
+            error: (error) => console.error('Error al actualizar stock:', error),
+          });
+        },
+        error: (error) => console.error('Producto no encontrado:', error),
+      });
+    } else {
+      console.error('ID del producto o cantidad inválida');
+    }
   }
 }

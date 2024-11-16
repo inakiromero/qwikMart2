@@ -148,6 +148,15 @@
       </tbody>
     </table>
   
+    <div *ngIf="productosConStockBajo.length > 0" class="alert alert-warning">
+      <strong>¡Aviso!</strong> Los siguientes productos tienen stock bajo:
+      <ul>
+        <li *ngFor="let producto of productosConStockBajo">
+          {{ producto.nombre }} (Stock: {{ producto.stock }})
+        </li>
+      </ul>
+    </div>
+
     <div *ngIf="productoSeleccionado" class="modal show d-block" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -184,4 +193,15 @@
         </div>
       </div>
     </div>
+    <h3>Cargar Stock</h3>
+  <div>
+    <label for="productoId">ID del Producto:</label>
+    <input type="number" [(ngModel)]="productoId" name="productoId" />
   </div>
+  <div>
+    <label for="cantidad">Cantidad a agregar:</label>
+    <input type="number" [(ngModel)]="cantidadStock" name="cantidad" />
+  </div>
+  <button (click)="cargarStock()">Cargar Stock</button>
+</div>
+  

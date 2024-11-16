@@ -77,4 +77,7 @@ export class VentasService {
   
     return this.http.get<Producto[]>(this.apiUrl, { params });
   }
+  obtenerVentasDelDia(fecha: string): Observable<Venta[]> {
+    return this.http.get<Venta[]>(`${this.apiUrl}?fecha=${fecha}`);
+  }
 }

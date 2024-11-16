@@ -5,7 +5,7 @@
       "nombre": "bimbo 330g",
       "categoria": "pan ",
       "precio": 300,
-      "stock": 20
+      "stock": 5
     },
     {
       "id": "2",
@@ -40,7 +40,7 @@
       "nombre": "tody",
       "categoria": "galletitas",
       "precio": 800,
-      "stock": 8
+      "stock": 5
     }
   ],
   "ventas": [
@@ -66,18 +66,25 @@
   ],
   "proveedores": [
     {
-      "id": 0,
+      "id": "0",
       "nombre": "agvstus",
       "email": "agvstus@hotmail.com",
       "telefono": "223 433 5994",
       "detalle": "heladeria y lacteos"
     },
     {
-      "id": 0,
+      "id": "0",
       "nombre": "coca cola",
       "email": "theCocacolaCompany@hotmail.com",
       "telefono": "11 528 3341",
       "detalle": "bebidas coca cola "
+    },
+    {
+      "id": "f927",
+      "nombre": "mercalito",
+      "email": "mercado@hotmail.com",
+      "telefono": "223 552 3456",
+      "detalle": "panaderia y surtidos"
     }
   ]
 }

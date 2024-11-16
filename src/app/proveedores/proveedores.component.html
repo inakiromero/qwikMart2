@@ -1,41 +1,104 @@
-<div>
-    <h2>Gestión de Proveedores</h2>
-  
-    <!-- Formulario para agregar o modificar proveedores -->
-    <form (ngSubmit)="agregarProveedor()">
-      <label>Nombre:</label>
-      <input [(ngModel)]="proveedor.nombre" name="nombre" required />
-  
-      <label>Email:</label>
-      <input [(ngModel)]="proveedor.email" name="email" required type="email" />
-  
-      <label>Teléfono:</label>
-      <input [(ngModel)]="proveedor.telefono" name="telefono" required />
-  
-      <label>Detalle:</label>
-      <textarea [(ngModel)]="proveedor.detalle" name="detalle"></textarea>
-  
-      <button type="submit">{{ proveedor.id ? 'Actualizar' : 'Agregar' }}</button>
-    </form>
-  
-    <!-- Listado de proveedores -->
-    <table>
+<div class="container">
+  <h2>Gestión de Proveedores</h2>
+
+  <form (ngSubmit)="proveedorSeleccionado ? guardarCambios() : agregarProveedor()">
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input
+        type="text"
+        id="nombre"
+        class="form-control"
+        [(ngModel)]="proveedor.nombre"
+        name="nombre"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        [(ngModel)]="proveedor.email"
+        name="email"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">Teléfono:</label>
+      <input
+        type="tel"
+        id="telefono"
+        class="form-control"
+        [(ngModel)]="proveedor.telefono"
+        name="telefono"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="detalle">Detalle (Productos que provee):</label>
+      <textarea
+        id="detalle"
+        class="form-control"
+        [(ngModel)]="proveedor.detalle"
+        name="detalle"
+        required
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+      {{ proveedorSeleccionado ? 'Guardar Cambios' : 'Agregar Proveedor' }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      *ngIf="proveedorSeleccionado"
+      (click)="cerrarModal()"
+    >
+      Cancelar
+    </button>
+  </form>
+
+  <hr />
+
+  <!-- Listado de proveedores -->
+  <h3>Lista de Proveedores</h3>
+  <table class="table table-striped">
+    <thead>
       <tr>
+        <th>ID</th>
         <th>Nombre</th>
         <th>Email</th>
         <th>Teléfono</th>
         <th>Detalle</th>
         <th>Acciones</th>
       </tr>
-      <tr *ngFor="let prov of proveedores">
-        <td>{{ prov.nombre }}</td>
-        <td>{{ prov.email }}</td>
-        <td>{{ prov.telefono }}</td>
-        <td>{{ prov.detalle }}</td>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proveedor of proveedores">
+        <td>{{ proveedor.id }}</td>
+        <td>{{ proveedor.nombre }}</td>
+        <td>{{ proveedor.email }}</td>
+        <td>{{ proveedor.telefono }}</td>
+        <td>{{ proveedor.detalle }}</td>
         <td>
-          <button (click)="seleccionarProveedor(prov)">Editar</button>
-          <button (click)="eliminarProveedor(prov.id)">Eliminar</button>
+          <button
+            class="btn btn-warning btn-sm"
+            (click)="abrirModalEditar(proveedor)"
+          >
+            Editar
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="eliminarProveedor(proveedor.id)"
+          >
+            Eliminar
+          </button>
         </td>
       </tr>
-    </table>
-  </div>
+    </tbody>
+  </table>
+</div>
