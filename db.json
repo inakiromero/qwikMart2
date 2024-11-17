@@ -5,42 +5,42 @@
       "nombre": "bimbo 330g",
       "categoria": "pan ",
       "precio": 300,
-      "stock": 5
+      "stock": 6
     },
     {
       "id": "2",
       "nombre": "nuttela 500g",
       "categoria": "chocolate",
       "precio": 1500,
-      "stock": 14
+      "stock": 11
     },
     {
       "id": "3",
       "nombre": "tang",
       "categoria": "bebida",
       "precio": 500,
-      "stock": 17
+      "stock": 15
     },
     {
       "id": "4",
       "nombre": "pepitas",
       "categoria": "galletitas",
       "precio": 2000,
-      "stock": 20
+      "stock": 18
     },
     {
       "id": "5",
       "nombre": "fernet branca",
       "categoria": "alcohol",
       "precio": 10000,
-      "stock": 10
+      "stock": 7
     },
     {
       "id": "6",
       "nombre": "tody",
       "categoria": "galletitas",
       "precio": 800,
-      "stock": 5
+      "stock": 8
     }
   ],
   "ventas": [
@@ -62,6 +62,113 @@
       ],
       "total": 3000,
       "fecha": "2024-11-15T17:53:38.232Z"
+    },
+    {
+      "id": "3ac6",
+      "items": [
+        {
+          "id": "1",
+          "nombre": "bimbo 330g",
+          "precio": 300,
+          "cantidad": 2
+        },
+        {
+          "id": "3",
+          "nombre": "tang",
+          "precio": 500,
+          "cantidad": 1
+        },
+        {
+          "id": "5",
+          "nombre": "fernet branca",
+          "precio": 10000,
+          "cantidad": 1
+        }
+      ],
+      "total": 11100,
+      "fecha": "2024-11-16T18:08:25.519Z"
+    },
+    {
+      "id": "0d0e",
+      "items": [
+        {
+          "id": "1",
+          "nombre": "bimbo 330g",
+          "precio": 300,
+          "cantidad": 4
+        }
+      ],
+      "total": 1200,
+      "fecha": "2024-11-16T18:08:44.827Z"
+    },
+    {
+      "id": "29ee",
+      "items": [
+        {
+          "id": "1",
+          "nombre": "bimbo 330g",
+          "precio": 300,
+          "cantidad": 3
+        },
+        {
+          "id": "2",
+          "nombre": "nuttela 500g",
+          "precio": 1500,
+          "cantidad": 1
+        },
+        {
+          "id": "3",
+          "nombre": "tang",
+          "precio": 500,
+          "cantidad": 1
+        }
+      ],
+      "total": 2900,
+      "fecha": "2024-11-17T20:29:47.345Z"
+    },
+    {
+      "id": "8207",
+      "items": [
+        {
+          "id": "4",
+          "nombre": "pepitas",
+          "precio": 2000,
+          "cantidad": 2
+        },
+        {
+          "id": "5",
+          "nombre": "fernet branca",
+          "precio": 10000,
+          "cantidad": 3
+        },
+        {
+          "id": "6",
+          "nombre": "tody",
+          "precio": 800,
+          "cantidad": 2
+        },
+        {
+          "id": "1",
+          "nombre": "bimbo 330g",
+          "precio": 300,
+          "cantidad": 1
+        }
+      ],
+      "total": 35900,
+      "fecha": "2024-11-17T20:30:06.080Z"
+    },
+    {
+      "id": "ca4a",
+      "items": [
+        {
+          "id": "2",
+          "nombre": "nuttela 500g",
+          "precio": 1500,
+          "cantidad": 2
+        }
+      ],
+      "total": 3000,
+      "fecha": "2024-11-17T20:30:11.790Z"
     }
   ],
   "proveedores": [
@@ -80,11 +187,11 @@
       "detalle": "bebidas coca cola "
     },
     {
-      "id": "f927",
-      "nombre": "mercalito",
-      "email": "mercado@hotmail.com",
-      "telefono": "223 552 3456",
-      "detalle": "panaderia y surtidos"
+      "id": "21cf",
+      "nombre": "pepsi",
+      "email": "pepsicComp@hotmail.com",
+      "telefono": "223 549 5932",
+      "detalle": "bebidas pepsi "
     }
   ]
 }

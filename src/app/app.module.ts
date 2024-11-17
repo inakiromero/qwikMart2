@@ -7,13 +7,15 @@ import { ProductoComponent } from './productos/productos.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { VentasComponent } from './ventas/ventas.component';
 import { NavbarComponent } from './navbar/navbar.component'; 
-import{ProveedoresComponent} from './proveedores/proveedores.component'
+import{ProveedoresComponent} from './proveedores/proveedores.component';
+import {CierreDiarioComponent} from'./cierre-diario/cierre-diario.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/productos', pathMatch: 'full' },
   { path: 'productos', component: ProductoComponent },
   { path: 'ventas', component: VentasComponent }, 
-  {path: 'proveedores', component: ProveedoresComponent}
+  {path: 'proveedores', component: ProveedoresComponent},
+  {path: 'cierreDiarios', component: CierreDiarioComponent}
 ];
 
 @NgModule({
@@ -22,8 +24,8 @@ const routes: Routes = [
     ProductoComponent,
     VentasComponent,
     NavbarComponent,
-    ProveedoresComponent
-
+    ProveedoresComponent,
+    CierreDiarioComponent
   ],
   imports: [
     BrowserModule,

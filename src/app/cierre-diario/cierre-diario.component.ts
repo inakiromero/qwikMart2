@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VentasService } from '../service/product/vents/ventas.service';
 import { Venta } from '../ventas/venta.model';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
-
+import autoTable from 'jspdf-autotable';
 @Component({
   selector: 'app-cierre-diario',
   templateUrl: './cierre-diario.component.html',
@@ -20,7 +19,7 @@ export class CierreDiarioComponent implements OnInit {
   ngOnInit() {
     this.obtenerVentasDelDia();
   }
-
+  
   obtenerVentasDelDia() {
     this.ventasService.obtenerVentasDelDia(this.fechaHoy).subscribe({
       next: (ventas) => {
@@ -30,7 +29,8 @@ export class CierreDiarioComponent implements OnInit {
       error: (error) => console.error('Error al obtener ventas del día:', error),
     });
   }
-
+  
+  
   calcularResumen() {
     this.totalIngresos = 0;
     this.desglosePorProducto = {};
@@ -51,27 +51,25 @@ export class CierreDiarioComponent implements OnInit {
   exportarPDF() {
     const doc = new jsPDF();
   
-    // Título del informe
     const fecha = new Date().toLocaleDateString();
+    doc.setFontSize(18);
     doc.text(`Cierre Diario - ${fecha}`, 10, 10);
   
-    // Datos de la tabla
     const data = Object.keys(this.desglosePorProducto || {}).map((nombre) => {
       const { cantidad, ingresos } = this.desglosePorProducto[nombre];
       return [nombre, cantidad, ingresos.toFixed(2)];
     });
   
-    // Genera la tabla
-    doc.autoTable({
+    autoTable(doc,{
+      startY: 20, 
       head: [['Producto', 'Cantidad Vendida', 'Ingresos']],
       body: data,
     });
   
-    // Total de ingresos
-    const finalY = doc.lastAutoTable.finalY || 20; // Posición para el texto final
+    const finalY = (doc as any).lastAutoTable.finalY || 20; 
+    doc.setFontSize(14);
     doc.text(`Total Ingresos: ${this.totalIngresos.toFixed(2)} €`, 10, finalY + 10);
   
-    // Guarda el archivo
     doc.save(`CierreDiario-${fecha}.pdf`);
   }
 }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProductoService } from '../product/productos.service';
 import { Venta, VentaItem } from '../../../ventas/venta.model';
 import { Observable, of, forkJoin, throwError } from 'rxjs';
-import { tap, switchMap, catchError } from 'rxjs/operators';
+import { tap, switchMap, catchError, map } from 'rxjs/operators';
 import { Producto } from '../../../productos/producto.model';
 
 @Injectable({
@@ -63,7 +63,9 @@ export class VentasService {
   private guardarComprobante(venta: Venta): void {
     console.log("Comprobante guardado", venta);
   }
-
+  listarVentas(): Observable<Venta[]> {
+    return this.http.get<Venta[]>(this.apiUrl);
+  }
 
   buscarProductos(criterio: Partial<Producto>): Observable<Producto[]> {
     let params: any = {};
@@ -77,7 +79,13 @@ export class VentasService {
   
     return this.http.get<Producto[]>(this.apiUrl, { params });
   }
-  obtenerVentasDelDia(fecha: string): Observable<Venta[]> {
-    return this.http.get<Venta[]>(`${this.apiUrl}?fecha=${fecha}`);
+  obtenerVentasDelDia(fechaHoy: string): Observable<Venta[]> {
+    return this.listarVentas().pipe(
+      map((ventas: any[]) =>
+        ventas.filter(
+          (venta) => new Date(venta.fecha).toISOString().split('T')[0] === fechaHoy
+        )
+      )
+    );
   }
 }
