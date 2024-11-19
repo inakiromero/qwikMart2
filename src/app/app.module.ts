@@ -14,6 +14,7 @@ import { LoginComponent } from './usuarios/login/login.component';
 import { RegistroComponent } from './usuarios/registro/registro.component';
 
 import { AuthGuard } from './guard/auth.guard';
+import { PerfilComponent } from './usuarios/perfil/perfil.component';
 
 
 const routes: Routes = [
@@ -22,8 +23,9 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
   { path: 'productos', component: ProductoComponent, canActivate: [AuthGuard] },
   { path: 'ventas', component: VentasComponent, canActivate: [AuthGuard] }, 
+  { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard] },
-  { path: 'cierre-diarios', component: CierreDiarioComponent, canActivate: [AuthGuard] }
+  { path: 'cierreDiarios', component: CierreDiarioComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -35,7 +37,8 @@ const routes: Routes = [
     ProveedoresComponent,
     CierreDiarioComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

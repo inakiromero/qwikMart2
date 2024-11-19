@@ -13,6 +13,13 @@
       "cuit": "20434567492",
       "email": "mercado@hotmail.com",
       "password": "123"
+    },
+    {
+      "id": "3",
+      "nombreMercado": "juanMercado",
+      "cuit": "20391288732",
+      "email": "juanMercado@hotmail.com",
+      "password": "4411"
     }
   ],
   "productos": [

@@ -12,8 +12,16 @@
           <a class="nav-link" routerLink="/proveedores" routerLinkActive="active">Proveedores</a>
         </li>
         <li class="nav-item">
-        <a routerLink="/cierreDiarios" routerLinkActive="active">Cierre Diario</a>
+        <a  routerLink="/cierreDiarios" routerLinkActive="active">Cierre Diario</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/perfil" routerLinkActive="active">Perfil</a>
+      </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="button" (click)="cerrarSesion()">Cerrar Sesión</a>
+        </li>
       </ul>
     </div>
   </nav>
