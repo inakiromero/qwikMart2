@@ -1,4 +1,20 @@
 {
+  "usuarios": [
+    {
+      "id": "1",
+      "nombreMercado": "Mercado Central",
+      "cuit": "123456789",
+      "email": "mercado@central.com",
+      "password": "1234"
+    },
+    {
+      "id": "2",
+      "nombreMercado": "mercalito",
+      "cuit": "20434567492",
+      "email": "mercado@hotmail.com",
+      "password": "123"
+    }
+  ],
   "productos": [
     {
       "id": "1",
@@ -12,21 +28,21 @@
       "nombre": "nuttela 500g",
       "categoria": "chocolate",
       "precio": 1500,
-      "stock": 11
+      "stock": 9
     },
     {
       "id": "3",
       "nombre": "tang",
       "categoria": "bebida",
       "precio": 500,
-      "stock": 15
+      "stock": 13
     },
     {
       "id": "4",
       "nombre": "pepitas",
       "categoria": "galletitas",
       "precio": 2000,
-      "stock": 18
+      "stock": 17
     },
     {
       "id": "5",
@@ -169,6 +185,38 @@
       ],
       "total": 3000,
       "fecha": "2024-11-17T20:30:11.790Z"
+    },
+    {
+      "id": "8cab",
+      "items": [
+        {
+          "id": "2",
+          "nombre": "nuttela 500g",
+          "precio": 1500,
+          "cantidad": 2
+        }
+      ],
+      "total": 3000,
+      "fecha": "2024-11-17T21:30:30.925Z"
+    },
+    {
+      "id": "27dc",
+      "items": [
+        {
+          "id": "4",
+          "nombre": "pepitas",
+          "precio": 2000,
+          "cantidad": 1
+        },
+        {
+          "id": "3",
+          "nombre": "tang",
+          "precio": 500,
+          "cantidad": 2
+        }
+      ],
+      "total": 3000,
+      "fecha": "2024-11-17T21:31:00.429Z"
     }
   ],
   "proveedores": [
