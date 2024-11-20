@@ -18,6 +18,12 @@ export class ProductoService {
   obtenerProductos(): Observable<Producto[]> {
     return this.http.get<Producto[]>(this.apiUrl);
   }
+  buscarProductoPorId(id: string): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.apiUrl}?id=${id}`);
+  }
+  buscarProductoPorNombre(nombre: string): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.apiUrl}?nombre=${nombre}`);
+  }
 
   agregarProducto(producto: Producto): Observable<Producto> {
     return this.http.post<Producto>(this.apiUrl, producto);

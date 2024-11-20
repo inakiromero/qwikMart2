@@ -9,10 +9,11 @@ import { Producto } from './producto.model';
 })
 export class ProductoComponent implements OnInit {
   productos: Producto[] = [];
-  producto: Producto = { id: 0, nombre: '', categoria: '', precio: 0, stock: 0 };
+  producto: Producto = { id: '', nombre: '', categoria: '', precio: 0, stock: 0 };
   productoSeleccionado: Producto | null = null;
   limiteMinimoStock = 6; 
   productosConStockBajo: Producto[] = [];
+  
 
   criterioBusqueda: Partial<Producto> = { id: undefined, nombre: '', categoria: '' };
 
@@ -34,17 +35,41 @@ export class ProductoComponent implements OnInit {
 
   agregarProducto() {
     if (this.formularioValido()) {
-      this.productoService.agregarProducto(this.producto).subscribe({
-        next: (productoCreado) => {
-          this.productos.push(productoCreado);
-          this.resetForm();
+      // Validación de ID único
+      this.productoService.buscarProductoPorId(this.producto.id).subscribe({
+        next: (productosConId) => {
+          if (productosConId.length > 0) {
+            console.error('Error: Ya existe un producto con el mismo ID.');
+            return;
+          }
+  
+          // Validación de nombre único
+          this.productoService.buscarProductoPorNombre(this.producto.nombre).subscribe({
+            next: (productosConNombre) => {
+              if (productosConNombre.length > 0) {
+                console.error('Error: Ya existe un producto con el mismo nombre.');
+                return;
+              }
+  
+              // Si pasa las validaciones, agregar producto
+              this.productoService.agregarProducto(this.producto).subscribe({
+                next: (productoCreado) => {
+                  this.productos.push(productoCreado);
+                  this.resetForm();
+                },
+                error: (error) => console.error('Error al agregar producto:', error),
+              });
+            },
+            error: (error) => console.error('Error al buscar producto por nombre:', error),
+          });
         },
-        error: (error) => console.error('Error al agregar producto:', error),
+        error: (error) => console.error('Error al buscar producto por ID:', error),
       });
     } else {
       console.error('Error: Complete todos los campos correctamente.');
     }
   }
+  
   verificarStockBajo() {
     this.productosConStockBajo = this.productos.filter(
       (producto) => producto.stock < this.limiteMinimoStock
@@ -57,7 +82,7 @@ export class ProductoComponent implements OnInit {
 
   formularioValido(): boolean {
     return (
-      this.producto.id > 0 &&
+      parseInt(this.producto.id) > 0 &&
       this.producto.nombre.trim() !== '' &&
       this.producto.categoria.trim() !== '' &&
       this.producto.precio > 0 &&
@@ -71,7 +96,7 @@ export class ProductoComponent implements OnInit {
 
   guardarCambios() {
     if (this.productoSeleccionado) {
-      this.productoService.modificarProducto(this.productoSeleccionado.id, this.productoSeleccionado).subscribe({
+      this.productoService.modificarProducto( parseInt(this.productoSeleccionado.id) , this.productoSeleccionado).subscribe({
         next: () => {
           this.listarProductos();
           this.cerrarModal();
@@ -81,8 +106,8 @@ export class ProductoComponent implements OnInit {
     }
   }
   
-  eliminarProducto(id: number) {
-    this.productoService.eliminarProducto(id).subscribe({
+  eliminarProducto(producto: Producto) {
+    this.productoService.eliminarProducto(parseInt(producto.id)).subscribe({
       next: () => this.listarProductos(),
       error: (error) => console.error('Error al eliminar producto:', error)
     });
@@ -101,7 +126,7 @@ export class ProductoComponent implements OnInit {
   }
   
   resetForm() {
-    this.producto = { id: 0, nombre: '', categoria: '', precio: 0, stock: 0 };
+    this.producto = { id: '', nombre: '', categoria: '', precio: 0, stock: 0 };
   }
 
   productoId: number = 0;
@@ -114,7 +139,7 @@ export class ProductoComponent implements OnInit {
           this.productoService.actualizarStock(this.productoId, nuevoStock).subscribe({
             next: () => {
               console.log(`Stock actualizado para el producto ID ${this.productoId}`);
-              this.listarProductos(); // Refrescar la lista de productos
+              this.listarProductos();
             },
             error: (error) => console.error('Error al actualizar stock:', error),
           });

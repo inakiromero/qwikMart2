@@ -1,0 +1,111 @@
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f6f9;
+  color: #333;
+}
+
+div {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+  color: #374785;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1rem;
+  text-align: center;
+  color: #555;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+table th, table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 1rem;
+  border: 1px solid #dee2e6;
+}
+
+table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+  text-transform: uppercase;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+h3 {
+  margin-top: 2rem;
+  font-weight: bold;
+  color: #212529;
+  text-align: right;
+}
+
+button {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+p.ng-template {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #dc3545;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    div {
+      padding: 1rem;
+    }
+  
+    h2, h3 {
+      font-size: 1.5rem;
+    }
+  
+    table th, table td {
+      font-size: 0.9rem;
+      padding: 0.5rem;
+    }
+  
+    button {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+    }
+  }

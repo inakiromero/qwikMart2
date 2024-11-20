@@ -36,7 +36,7 @@ export class VentasService {
     return forkJoin(stockVerificacion$).pipe(
       switchMap((productosActualizados: { producto: Producto, nuevoStock: number }[]) => {
         const actualizacionesStock$ = productosActualizados.map(({ producto, nuevoStock }) =>
-          this.productoService.actualizarStock(producto.id, nuevoStock)
+          this.productoService.actualizarStock(parseInt(producto.id), nuevoStock)
         );
 
         total = items.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
@@ -67,6 +67,7 @@ export class VentasService {
     return this.http.get<Venta[]>(this.apiUrl);
   }
 
+  
   buscarProductos(criterio: Partial<Producto>): Observable<Producto[]> {
     let params: any = {};
   
@@ -74,8 +75,7 @@ export class VentasService {
       params.id = criterio.id;
     }
     if (criterio.nombre) {
-      params.nombre = criterio.nombre;
-    }
+      params.nombre_like = criterio.nombre;     }
   
     return this.http.get<Producto[]>(this.apiUrl, { params });
   }
@@ -88,4 +88,33 @@ export class VentasService {
       )
     );
   }
+  generarTicket(ventaItems: VentaItem[]): string {
+    if (!ventaItems || ventaItems.length === 0) {
+      return `No hay productos en esta venta.\nTotal: $0.00`;
+    }
+  
+    const encabezado = `
+      *** Ticket de Venta ***
+      Fecha: ${new Date().toLocaleDateString()} Hora: ${new Date().toLocaleTimeString()}
+      -----------------------------
+    `;
+  
+    let detalle = '';
+    ventaItems.forEach(item => {
+      detalle += `
+        ${item.nombre} x${item.cantidad} - $${(item.cantidad * item.precio).toFixed(2)}
+      `;
+    });
+  
+    const total = ventaItems.reduce((sum, item) => sum + item.cantidad * item.precio, 0);
+  
+    const totalLinea = `
+      -----------------------------
+      Total: $${total.toFixed(2)}
+      -----------------------------
+    `;
+  
+    return encabezado + detalle + totalLinea;
+  }
+  
 }

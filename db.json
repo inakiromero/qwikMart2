@@ -25,217 +25,226 @@
   "productos": [
     {
       "id": "1",
-      "nombre": "bimbo 330g",
-      "categoria": "pan ",
-      "precio": 300,
-      "stock": 6
+      "nombre": "Yerba Mate 1kg",
+      "categoria": "Bebidas Calientes",
+      "precio": 1200,
+      "stock": 24
     },
     {
       "id": "2",
-      "nombre": "nuttela 500g",
-      "categoria": "chocolate",
-      "precio": 1500,
-      "stock": 9
+      "nombre": "Harina 000 1kg",
+      "categoria": "Panadería",
+      "precio": 450,
+      "stock": 99
     },
     {
       "id": "3",
-      "nombre": "tang",
-      "categoria": "bebida",
-      "precio": 500,
-      "stock": 13
+      "nombre": "Azúcar Blanca 1kg",
+      "categoria": "Dulces",
+      "precio": 390,
+      "stock": 49
     },
     {
       "id": "4",
-      "nombre": "pepitas",
-      "categoria": "galletitas",
-      "precio": 2000,
-      "stock": 17
+      "nombre": "Leche Entera 1L",
+      "categoria": "Lácteos",
+      "precio": 350,
+      "stock": 29
     },
     {
       "id": "5",
-      "nombre": "fernet branca",
-      "categoria": "alcohol",
-      "precio": 10000,
-      "stock": 7
+      "nombre": "Aceite de Girasol 1.5L",
+      "categoria": "Despensa",
+      "precio": 1800,
+      "stock": 9
     },
     {
       "id": "6",
-      "nombre": "tody",
-      "categoria": "galletitas",
-      "precio": 800,
-      "stock": 8
+      "nombre": "Fideos Spaghetti 500g",
+      "categoria": "Pastas",
+      "precio": 500,
+      "stock": 199
+    },
+    {
+      "id": "7",
+      "nombre": "Manteca 200g",
+      "categoria": "Lácteos",
+      "precio": 650,
+      "stock": 15
+    },
+    {
+      "id": "8",
+      "nombre": "Arroz Largo Fino 1kg",
+      "categoria": "Despensa",
+      "precio": 480,
+      "stock": 74
+    },
+    {
+      "id": "9",
+      "nombre": "Dulce de Leche 400g",
+      "categoria": "Dulces",
+      "precio": 950,
+      "stock": 40
+    },
+    {
+      "id": "10",
+      "nombre": "Café Molido 250g",
+      "categoria": "Bebidas Calientes",
+      "precio": 1800,
+      "stock": 19
+    },
+    {
+      "id": "11",
+      "nombre": "Jugo en Polvo (5 sobres)",
+      "categoria": "Bebidas",
+      "precio": 200,
+      "stock": 300
+    },
+    {
+      "id": "12",
+      "nombre": "Sal Fina 500g",
+      "categoria": "Condimentos",
+      "precio": 150,
+      "stock": 400
+    },
+    {
+      "id": "13",
+      "nombre": "Tomate Triturado 520g",
+      "categoria": "Enlatados",
+      "precio": 390,
+      "stock": 60
+    },
+    {
+      "id": "14",
+      "nombre": "Galletitas de Agua 400g",
+      "categoria": "Panadería",
+      "precio": 700,
+      "stock": 80
+    },
+    {
+      "id": "15",
+      "nombre": "Cacao en Polvo 180g",
+      "categoria": "Dulces",
+      "precio": 1200,
+      "stock": 45
+    },
+    {
+      "id": "16",
+      "nombre": "Té en Saquitos (50 unidades)",
+      "categoria": "Bebidas Calientes",
+      "precio": 650,
+      "stock": 150
+    },
+    {
+      "id": "17",
+      "nombre": "Cerveza Rubia 1L",
+      "categoria": "Bebidas Alcohólicas",
+      "precio": 650,
+      "stock": 35
+    },
+    {
+      "id": "18",
+      "nombre": "Chocolate en Barra 100g",
+      "categoria": "Dulces",
+      "precio": 600,
+      "stock": 90
+    },
+    {
+      "id": "19",
+      "nombre": "Sopa Instantánea (5 sobres)",
+      "categoria": "Despensa",
+      "precio": 500,
+      "stock": 250
+    },
+    {
+      "id": "20",
+      "nombre": "Mayonesa 500g",
+      "categoria": "Condimentos",
+      "precio": 780,
+      "stock": 55
+    },
+    {
+      "id": "21",
+      "nombre": "Bimbo Artesano",
+      "categoria": "panes",
+      "precio": 1500,
+      "stock": 10
+    },
+    {
+      "id": 22,
+      "nombre": "fernet branca",
+      "categoria": "alcohol",
+      "precio": 10000,
+      "stock": 10
     }
   ],
   "ventas": [
     {
-      "id": "88d4",
+      "id": "0dc6",
       "items": [
         {
-          "id": "2",
-          "nombre": "nuttela 500g",
-          "precio": 1500,
+          "id": 1,
+          "nombre": "Yerba Mate 1kg",
+          "precio": 1200,
           "cantidad": 1
         },
         {
-          "id": "3",
-          "nombre": "tang",
-          "precio": 500,
-          "cantidad": 3
-        }
-      ],
-      "total": 3000,
-      "fecha": "2024-11-15T17:53:38.232Z"
-    },
-    {
-      "id": "3ac6",
-      "items": [
-        {
-          "id": "1",
-          "nombre": "bimbo 330g",
-          "precio": 300,
-          "cantidad": 2
-        },
-        {
-          "id": "3",
-          "nombre": "tang",
-          "precio": 500,
+          "id": 2,
+          "nombre": "Harina 000 1kg",
+          "precio": 450,
           "cantidad": 1
         },
         {
-          "id": "5",
-          "nombre": "fernet branca",
-          "precio": 10000,
-          "cantidad": 1
-        }
-      ],
-      "total": 11100,
-      "fecha": "2024-11-16T18:08:25.519Z"
-    },
-    {
-      "id": "0d0e",
-      "items": [
-        {
-          "id": "1",
-          "nombre": "bimbo 330g",
-          "precio": 300,
-          "cantidad": 4
-        }
-      ],
-      "total": 1200,
-      "fecha": "2024-11-16T18:08:44.827Z"
-    },
-    {
-      "id": "29ee",
-      "items": [
-        {
-          "id": "1",
-          "nombre": "bimbo 330g",
-          "precio": 300,
-          "cantidad": 3
-        },
-        {
-          "id": "2",
-          "nombre": "nuttela 500g",
-          "precio": 1500,
+          "id": 3,
+          "nombre": "Azúcar Blanca 1kg",
+          "precio": 390,
           "cantidad": 1
         },
         {
-          "id": "3",
-          "nombre": "tang",
+          "id": 4,
+          "nombre": "Leche Entera 1L",
+          "precio": 350,
+          "cantidad": 1
+        },
+        {
+          "id": 5,
+          "nombre": "Aceite de Girasol 1.5L",
+          "precio": 1800,
+          "cantidad": 1
+        },
+        {
+          "id": 6,
+          "nombre": "Fideos Spaghetti 500g",
           "precio": 500,
           "cantidad": 1
-        }
-      ],
-      "total": 2900,
-      "fecha": "2024-11-17T20:29:47.345Z"
-    },
-    {
-      "id": "8207",
-      "items": [
-        {
-          "id": "4",
-          "nombre": "pepitas",
-          "precio": 2000,
-          "cantidad": 2
         },
         {
-          "id": "5",
-          "nombre": "fernet branca",
-          "precio": 10000,
-          "cantidad": 3
-        },
-        {
-          "id": "6",
-          "nombre": "tody",
-          "precio": 800,
-          "cantidad": 2
-        },
-        {
-          "id": "1",
-          "nombre": "bimbo 330g",
-          "precio": 300,
-          "cantidad": 1
-        }
-      ],
-      "total": 35900,
-      "fecha": "2024-11-17T20:30:06.080Z"
-    },
-    {
-      "id": "ca4a",
-      "items": [
-        {
-          "id": "2",
-          "nombre": "nuttela 500g",
-          "precio": 1500,
-          "cantidad": 2
-        }
-      ],
-      "total": 3000,
-      "fecha": "2024-11-17T20:30:11.790Z"
-    },
-    {
-      "id": "8cab",
-      "items": [
-        {
-          "id": "2",
-          "nombre": "nuttela 500g",
-          "precio": 1500,
-          "cantidad": 2
-        }
-      ],
-      "total": 3000,
-      "fecha": "2024-11-17T21:30:30.925Z"
-    },
-    {
-      "id": "27dc",
-      "items": [
-        {
-          "id": "4",
-          "nombre": "pepitas",
-          "precio": 2000,
+          "id": 8,
+          "nombre": "Arroz Largo Fino 1kg",
+          "precio": 480,
           "cantidad": 1
         },
         {
-          "id": "3",
-          "nombre": "tang",
-          "precio": 500,
-          "cantidad": 2
+          "id": 10,
+          "nombre": "Café Molido 250g",
+          "precio": 1800,
+          "cantidad": 1
         }
       ],
-      "total": 3000,
-      "fecha": "2024-11-17T21:31:00.429Z"
+      "total": 6970,
+      "fecha": "2024-11-20T23:04:11.518Z"
     }
   ],
   "proveedores": [
     {
-      "id": "0",
+      "id": "1",
       "nombre": "agvstus",
       "email": "agvstus@hotmail.com",
       "telefono": "223 433 5994",
       "detalle": "heladeria y lacteos"
     },
     {
-      "id": "0",
+      "id": "2",
       "nombre": "coca cola",
       "email": "theCocacolaCompany@hotmail.com",
       "telefono": "11 528 3341",

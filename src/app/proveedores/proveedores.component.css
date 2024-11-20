@@ -1,0 +1,139 @@
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+  }
+  
+  h2, h3 {
+    color: #4a4a8f;
+  }
+  
+  /* Form Styles */
+  form {
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  input, textarea, button {
+    font-size: 16px;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    background: #dfdfdf;
+    transition: border-color 0.3s;
+  }
+  
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #000000;
+    background: #fff;
+  }
+  
+  /* Buttons */
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  .btn-primary {
+    background-color: #4a4a8f;
+  }
+  
+  .btn-primary:hover {
+    background-color: #3a3a7a;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  .btn-warning {
+    background-color: #ffc107;
+  }
+  
+  .btn-warning:hover {
+    background-color: #e0a800;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  /* Table Styles */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgb(0, 0, 0);
+  }
+  
+  .table thead {
+    background-color: #4a4a8f;
+    color: #fff;
+  }
+  
+  .table th, .table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9fc;
+  }
+  
+  .table-striped tbody tr:hover {
+    background-color: #f1f1f8;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .form-group, .table {
+      margin-top: 10px;
+    }
+  
+    button {
+      width: 100%;
+      margin-top: 10px;
+    }
+  
+    .btn-sm {
+      padding: 8px;
+    }
+  }

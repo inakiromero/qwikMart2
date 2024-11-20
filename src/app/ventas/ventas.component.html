@@ -1,26 +1,62 @@
-<div>
-  <h2>Realizar Venta</h2>
-  <input type="text" placeholder="Buscar Producto por ID o Nombre" #inputBusqueda />
-  <button (click)="buscarProducto(inputBusqueda.value)">Buscar</button>
+<div class="form-group">
+  <input
+    type="text"
+    placeholder="Buscar Producto por ID o Nombre"
+    class="form-control"
+    #inputBusqueda
+  />
+  <button class="btn btn-primary mt-2" (click)="buscarProducto(inputBusqueda.value)">
+    Buscar
+  </button>
+
+
+ <div *ngIf="productos.length > 0" class="mt-3">
+   <h3>Resultados de la Búsqueda</h3>
+   <ul class="list-group">
+     <li *ngFor="let producto of productos" class="list-group-item d-flex justify-content-between align-items-center">
+       <span>
+        <strong>{{ producto.nombre }}</strong> 
+        - {{ producto.categoria }} 
+        - ${{ producto.precio }}
+      </span>
+      <button class="btn btn-sm btn-success" (click)="agregarProductoAVenta(producto)">
+        Agregar
+      </button>
+    </li>
+  </ul>
+ </div>
+
+ <div *ngIf="productos.length === 0 && busquedaRealizada" class="mt-3">
+  <p class="text-danger">No se encontraron productos que coincidan con la búsqueda.</p>
+ </div>
 
   <h3>Productos en la Venta</h3>
-  <table>
-    <tr>
-      <th>Producto</th>
-      <th>Precio</th>
-      <th>Cantidad</th>
-      <th>Total</th>
-      <th>Acciones</th>
-    </tr>
-    <tr *ngFor="let item of ventaItems">
-      <td>{{ item.nombre }}</td>
-      <td>{{ item.precio | currency }}</td>
-      <td>{{ item.cantidad }}</td>
-      <td>{{ item.precio * item.cantidad | currency }}</td>
-      <td>
-        <button (click)="quitarProductoDeVenta(item)">Quitar</button>
-      </td>
-    </tr>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Total</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of ventaItems">
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.precio | currency }}</td>
+        <td>{{ item.cantidad }}</td>
+        <td>{{ item.precio * item.cantidad | currency }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="quitarProductoDeVenta(item)">
+            Quitar
+          </button>
+        </td>
+      </tr>
+    </tbody>
   </table>
-  <button (click)="procesarVenta()">Procesar Venta</button>
+
+  <div class="form-group text-center">
+    <button class="btn btn-success" (click)="procesarVenta()">Generar Venta</button>
+  </div>
 </div>

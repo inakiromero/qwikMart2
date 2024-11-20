@@ -2,7 +2,7 @@
   <h2>Sistema de Gestión de Productos</h2>
 
   <form (ngSubmit)="agregarProducto()" #productoForm="ngForm">
-    <h3>{{ producto.id ? 'Modificar Producto' : 'Agregar Producto' }}</h3>
+    <h3>{{ producto.id ? 'Agregando producto...' : 'Agregar Producto' }}</h3>
 
     <div class="form-group">
       <label for="id">ID:</label>
@@ -142,7 +142,7 @@
           <td>{{ prod.stock }}</td>
           <td>
             <button (click)="abrirModalEditar(prod)" class="btn btn-warning">Editar</button>
-            <button (click)="eliminarProducto(prod.id)" class="btn btn-danger">Eliminar</button>
+            <button (click)="eliminarProducto(prod)" class="btn btn-danger">Eliminar</button>
           </td>
         </tr>
       </tbody>
@@ -204,4 +204,3 @@
   </div>
   <button (click)="cargarStock()">Cargar Stock</button>
 </div>
-  

@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #11ae81; /* Fondo claro para contraste */
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  button {
+    border-radius: 5px;
+  }
+
+  .alert {
+    border-radius: 10px;
+  }
+
+  
