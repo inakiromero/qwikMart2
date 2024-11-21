@@ -13,7 +13,8 @@ export class VentasComponent {
   productos: Producto[] = [];
   ventaItems: VentaItem[] = [];
   busquedaRealizada: boolean = false; 
-  
+  tipoPago: 'Efectivo' | 'Tarjeta' | 'Transferencia QR' | '' = ''; // Inicializado vacío
+
   constructor(private productoService: ProductoService, private ventasService: VentasService) {}
 
   buscarProducto(valorBusqueda: string): void {
@@ -59,14 +60,26 @@ export class VentasComponent {
   }
 
   procesarVenta(): void {
-    this.ventasService.registrarVenta(this.ventaItems).subscribe({
-      next: venta => {
-        console.log('Venta realizada:', venta);
+    if (!this.tipoPago) {
+      console.error('Seleccione un tipo de pago.');
+      return;
+    }
+  
+    const venta = {
+      items: this.ventaItems,
+      fecha: new Date().toISOString(),
+      total: this.ventaItems.reduce((sum, item) => sum + item.cantidad * item.precio, 0),
+      tipoPago: this.tipoPago
+    };
+  
+    this.ventasService.registrarVenta(this.ventaItems,this.tipoPago).subscribe({
+      next: (respuesta) => {
+        console.log('Venta realizada:', respuesta);
         this.abrirVentanaTicket();
-        this.ventaItems = []; // Limpiar los items después de la venta
-
+        this.ventaItems = [];
+        this.tipoPago = ''; // Resetea el tipo de pago
       },
-      error: error => console.error('Error al registrar la venta:', error)
+      error: (error) => console.error('Error al registrar la venta:', error)
     });
   }
   
@@ -85,35 +98,18 @@ export class VentasComponent {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Ticket de Venta</title>
         <style>
-          body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-          }
-          h1, h2 {
-            text-align: center;
-          }
-          table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-          }
-          th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-          }
-          th {
-            background-color: #f2f2f2;
-          }
-          .total {
-            font-weight: bold;
-            text-align: right;
-          }
+          body { font-family: Arial, sans-serif; margin: 20px; }
+          h1, h2 { text-align: center; }
+          table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+          th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+          th { background-color: #f2f2f2; }
+          .total { font-weight: bold; text-align: right; }
         </style>
       </head>
       <body>
         <h1>Ticket de Venta</h1>
         <p><strong>Fecha:</strong> ${new Date().toLocaleDateString()} <strong>Hora:</strong> ${new Date().toLocaleTimeString()}</p>
+        <p><strong>Tipo de Pago:</strong> ${this.tipoPago}</p>
         <table>
           <thead>
             <tr>
@@ -155,10 +151,10 @@ export class VentasComponent {
       nuevaVentana.document.open();
       nuevaVentana.document.write(ticketHTML);
       nuevaVentana.document.close();
-  
       nuevaVentana.print();
     } else {
       console.error('No se pudo abrir la ventana del ticket.');
     }
   }
+  
 }

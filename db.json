@@ -56,42 +56,42 @@
       "nombre": "Aceite de Girasol 1.5L",
       "categoria": "Despensa",
       "precio": 1800,
-      "stock": 9
+      "stock": 8
     },
     {
       "id": "6",
       "nombre": "Fideos Spaghetti 500g",
       "categoria": "Pastas",
       "precio": 500,
-      "stock": 199
+      "stock": 197
     },
     {
       "id": "7",
       "nombre": "Manteca 200g",
       "categoria": "Lácteos",
       "precio": 650,
-      "stock": 15
+      "stock": 14
     },
     {
       "id": "8",
       "nombre": "Arroz Largo Fino 1kg",
       "categoria": "Despensa",
       "precio": 480,
-      "stock": 74
+      "stock": 73
     },
     {
       "id": "9",
       "nombre": "Dulce de Leche 400g",
       "categoria": "Dulces",
       "precio": 950,
-      "stock": 40
+      "stock": 39
     },
     {
       "id": "10",
       "nombre": "Café Molido 250g",
       "categoria": "Bebidas Calientes",
       "precio": 1800,
-      "stock": 19
+      "stock": 17
     },
     {
       "id": "11",
@@ -105,21 +105,21 @@
       "nombre": "Sal Fina 500g",
       "categoria": "Condimentos",
       "precio": 150,
-      "stock": 400
+      "stock": 399
     },
     {
       "id": "13",
       "nombre": "Tomate Triturado 520g",
       "categoria": "Enlatados",
       "precio": 390,
-      "stock": 60
+      "stock": 59
     },
     {
       "id": "14",
       "nombre": "Galletitas de Agua 400g",
       "categoria": "Panadería",
       "precio": 700,
-      "stock": 80
+      "stock": 77
     },
     {
       "id": "15",
@@ -133,21 +133,21 @@
       "nombre": "Té en Saquitos (50 unidades)",
       "categoria": "Bebidas Calientes",
       "precio": 650,
-      "stock": 150
+      "stock": 149
     },
     {
       "id": "17",
       "nombre": "Cerveza Rubia 1L",
       "categoria": "Bebidas Alcohólicas",
       "precio": 650,
-      "stock": 35
+      "stock": 33
     },
     {
       "id": "18",
       "nombre": "Chocolate en Barra 100g",
       "categoria": "Dulces",
       "precio": 600,
-      "stock": 90
+      "stock": 89
     },
     {
       "id": "19",
@@ -168,13 +168,6 @@
       "nombre": "Bimbo Artesano",
       "categoria": "panes",
       "precio": 1500,
-      "stock": 10
-    },
-    {
-      "id": 22,
-      "nombre": "fernet branca",
-      "categoria": "alcohol",
-      "precio": 10000,
       "stock": 10
     }
   ],
@@ -233,6 +226,124 @@
       ],
       "total": 6970,
       "fecha": "2024-11-20T23:04:11.518Z"
+    },
+    {
+      "id": "89a2",
+      "items": [
+        {
+          "id": 23,
+          "nombre": "oreo 330g",
+          "precio": 1000,
+          "cantidad": 3
+        },
+        {
+          "id": 7,
+          "nombre": "Manteca 200g",
+          "precio": 650,
+          "cantidad": 1
+        },
+        {
+          "id": 17,
+          "nombre": "Cerveza Rubia 1L",
+          "precio": 650,
+          "cantidad": 2
+        },
+        {
+          "id": 18,
+          "nombre": "Chocolate en Barra 100g",
+          "precio": 600,
+          "cantidad": 1
+        },
+        {
+          "id": 22,
+          "nombre": "fernet branca",
+          "precio": 10000,
+          "cantidad": 1
+        }
+      ],
+      "total": 15550,
+      "fecha": "2024-11-21T00:08:51.775Z"
+    },
+    {
+      "id": "ffce",
+      "items": [
+        {
+          "id": 6,
+          "nombre": "Fideos Spaghetti 500g",
+          "precio": 500,
+          "cantidad": 1
+        },
+        {
+          "id": 8,
+          "nombre": "Arroz Largo Fino 1kg",
+          "precio": 480,
+          "cantidad": 1
+        },
+        {
+          "id": 10,
+          "nombre": "Café Molido 250g",
+          "precio": 1800,
+          "cantidad": 1
+        },
+        {
+          "id": 12,
+          "nombre": "Sal Fina 500g",
+          "precio": 150,
+          "cantidad": 1
+        }
+      ],
+      "total": 2930,
+      "fecha": "2024-11-21T04:05:40.274Z"
+    },
+    {
+      "id": "4640",
+      "items": [
+        {
+          "id": 5,
+          "nombre": "Aceite de Girasol 1.5L",
+          "precio": 1800,
+          "cantidad": 1
+        },
+        {
+          "id": 6,
+          "nombre": "Fideos Spaghetti 500g",
+          "precio": 500,
+          "cantidad": 1
+        },
+        {
+          "id": 9,
+          "nombre": "Dulce de Leche 400g",
+          "precio": 950,
+          "cantidad": 1
+        },
+        {
+          "id": 10,
+          "nombre": "Café Molido 250g",
+          "precio": 1800,
+          "cantidad": 1
+        },
+        {
+          "id": 13,
+          "nombre": "Tomate Triturado 520g",
+          "precio": 390,
+          "cantidad": 1
+        },
+        {
+          "id": 14,
+          "nombre": "Galletitas de Agua 400g",
+          "precio": 700,
+          "cantidad": 3
+        },
+        {
+          "id": 16,
+          "nombre": "Té en Saquitos (50 unidades)",
+          "precio": 650,
+          "cantidad": 1
+        }
+      ],
+      "total": 8190,
+      "fecha": "2024-11-21T04:24:47.648Z",
+      "tipoPago": "Tarjeta"
     }
   ],
   "proveedores": [

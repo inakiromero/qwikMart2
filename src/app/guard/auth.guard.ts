@@ -13,7 +13,6 @@ export class AuthGuard implements CanActivate {
     if (this.authService.obtenerToken()) {
       return true; // El usuario está autenticado
     } else {
-      // Redirige al usuario a la página de inicio de sesión
       return this.router.createUrlTree(['/login']);
     }
   }

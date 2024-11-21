@@ -10,14 +10,14 @@ import { Producto } from '../../../productos/producto.model';
   providedIn: 'root',
 })
 export class VentasService {
-  private apiUrl = 'http://localhost:3000/ventas'; 
+  private apiUrl = 'http://localhost:3000/ventas';
 
   constructor(
     private productoService: ProductoService,
-    private http: HttpClient,
+    private http: HttpClient
   ) {}
 
-  registrarVenta(items: VentaItem[]): Observable<Venta> {
+  registrarVenta(items: VentaItem[], tipoPago: 'Efectivo' | 'Tarjeta' | 'Transferencia QR'): Observable<Venta> {
     let total = 0;
 
     const stockVerificacion$ = items.map(item =>
@@ -34,7 +34,7 @@ export class VentasService {
     );
 
     return forkJoin(stockVerificacion$).pipe(
-      switchMap((productosActualizados: { producto: Producto, nuevoStock: number }[]) => {
+      switchMap((productosActualizados: { producto: Producto; nuevoStock: number }[]) => {
         const actualizacionesStock$ = productosActualizados.map(({ producto, nuevoStock }) =>
           this.productoService.actualizarStock(parseInt(producto.id), nuevoStock)
         );
@@ -43,7 +43,7 @@ export class VentasService {
 
         return forkJoin(actualizacionesStock$).pipe(
           switchMap(() => {
-            const venta: Venta = { items, total, fecha: new Date() };
+            const venta: Venta = { items, total, fecha: new Date(), tipoPago };
             return this.guardarVenta(venta);
           })
         );
@@ -61,60 +61,63 @@ export class VentasService {
   }
 
   private guardarComprobante(venta: Venta): void {
-    console.log("Comprobante guardado", venta);
+    console.log('Comprobante guardado', venta);
   }
+
   listarVentas(): Observable<Venta[]> {
     return this.http.get<Venta[]>(this.apiUrl);
   }
 
-  
   buscarProductos(criterio: Partial<Producto>): Observable<Producto[]> {
     let params: any = {};
-  
+
     if (criterio.id !== undefined) {
       params.id = criterio.id;
     }
     if (criterio.nombre) {
-      params.nombre_like = criterio.nombre;     }
-  
+      params.nombre_like = criterio.nombre;
+    }
+
     return this.http.get<Producto[]>(this.apiUrl, { params });
   }
+
   obtenerVentasDelDia(fechaHoy: string): Observable<Venta[]> {
     return this.listarVentas().pipe(
       map((ventas: any[]) =>
         ventas.filter(
-          (venta) => new Date(venta.fecha).toISOString().split('T')[0] === fechaHoy
+          venta => new Date(venta.fecha).toISOString().split('T')[0] === fechaHoy
         )
       )
     );
   }
-  generarTicket(ventaItems: VentaItem[]): string {
+
+  generarTicket(ventaItems: VentaItem[], tipoPago: 'Efectivo' | 'Tarjeta' | 'Transferencia QR'): string {
     if (!ventaItems || ventaItems.length === 0) {
       return `No hay productos en esta venta.\nTotal: $0.00`;
     }
-  
+
     const encabezado = `
       *** Ticket de Venta ***
       Fecha: ${new Date().toLocaleDateString()} Hora: ${new Date().toLocaleTimeString()}
+      Tipo de Pago: ${tipoPago}
       -----------------------------
     `;
-  
+
     let detalle = '';
     ventaItems.forEach(item => {
       detalle += `
         ${item.nombre} x${item.cantidad} - $${(item.cantidad * item.precio).toFixed(2)}
       `;
     });
-  
+
     const total = ventaItems.reduce((sum, item) => sum + item.cantidad * item.precio, 0);
-  
+
     const totalLinea = `
       -----------------------------
       Total: $${total.toFixed(2)}
       -----------------------------
     `;
-  
+
     return encabezado + detalle + totalLinea;
   }
-  
 }
