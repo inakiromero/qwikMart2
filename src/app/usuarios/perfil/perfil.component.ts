@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../service/product/Auth/usarios.service';
 
 @Component({
@@ -7,22 +8,42 @@ import { AuthService } from '../../service/product/Auth/usarios.service';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-  usuario: any = {}; // Información del usuario
+  elUsuario: any = {}; // Usuario actual
+  enEdicion = false; // Controla si está en modo edición
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.cargarUsuario();
   }
 
-  cargarUsuario() {
-    this.usuario = this.authService.obtenerUsuarioActual();
+  cargarUsuario(): void {
+    this.authService.obtenerUsuarioActual().subscribe((usuario) => {
+      if (usuario) {
+        this.elUsuario = usuario;
+      } else {
+        alert('No se encontró un usuario autenticado. Por favor, inicie sesión.');
+        this.cerrarSesion();
+      }
+    });
   }
 
-  actualizarUsuario() {
-    this.authService.actualizarUsuario(this.usuario).subscribe({
-      next: () => alert('Usuario actualizado con éxito'),
+  habilitarEdicion(): void {
+    this.enEdicion = true;
+  }
+
+  actualizarUsuario(): void {
+    this.authService.actualizarUsuario(this.elUsuario).subscribe({
+      next: () => {
+        alert('Usuario actualizado con éxito');
+        this.enEdicion = false;
+      },
       error: () => alert('Error al actualizar usuario'),
     });
+  }
+
+  cerrarSesion(): void {
+    this.authService.cerrarSesion();
+    this.router.navigate(['/productos']);
   }
 }

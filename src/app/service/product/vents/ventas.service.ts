@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { ProductoService } from '../product/productos.service';
 import { Venta, VentaItem } from '../../../ventas/venta.model';
 import { Observable, of, forkJoin, throwError } from 'rxjs';
-import { tap, switchMap, catchError, map } from 'rxjs/operators';
+import {  switchMap, catchError, map } from 'rxjs/operators';
 import { Producto } from '../../../productos/producto.model';
+import { AuthService } from '../Auth/usarios.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +15,20 @@ export class VentasService {
 
   constructor(
     private productoService: ProductoService,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {}
 
-  registrarVenta(items: VentaItem[], tipoPago: 'Efectivo' | 'Tarjeta' | 'Transferencia QR'): Observable<Venta> {
-    let total = 0;
-
-    const stockVerificacion$ = items.map(item =>
+  registrarVenta(
+    items: VentaItem[],
+    tipoPago: 'Efectivo' | 'Tarjeta' | 'Transferencia QR'
+  ): Observable<Venta> {
+    const token = this.authService.obtenerToken();
+    if (!token) {
+      return throwError('Usuario no autenticado. Inicie sesión para continuar.');
+    }
+  
+    const stockVerificacion$ = items.map((item) =>
       this.productoService.obtenerProductoPorId(item.id).pipe(
         switchMap((producto: Producto) => {
           const nuevoStock = producto.stock - item.cantidad;
@@ -32,36 +40,38 @@ export class VentasService {
         })
       )
     );
-
+  
     return forkJoin(stockVerificacion$).pipe(
-      switchMap((productosActualizados: { producto: Producto; nuevoStock: number }[]) => {
+      switchMap((productosActualizados) => {
         const actualizacionesStock$ = productosActualizados.map(({ producto, nuevoStock }) =>
-          this.productoService.actualizarStock(parseInt(producto.id), nuevoStock)
+          this.productoService.actualizarStock(producto.id, nuevoStock)
         );
-
-        total = items.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
-
+  
+        const total = items.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+  
         return forkJoin(actualizacionesStock$).pipe(
           switchMap(() => {
-            const venta: Venta = { items, total, fecha: new Date(), tipoPago };
+            const venta: Venta = {
+              items,
+              total,
+              fecha: new Date(),
+              tipoPago,
+              id_Usuario: token,
+            };
             return this.guardarVenta(venta);
           })
         );
       }),
-      tap(venta => this.guardarComprobante(venta)),
-      catchError(error => {
+      catchError((error) => {
         console.error('Error en la verificación de stock o en la venta:', error);
         return throwError('Error al procesar la venta. Verifique el stock e intente nuevamente.');
       })
     );
   }
+  
 
   private guardarVenta(venta: Venta): Observable<Venta> {
     return this.http.post<Venta>(this.apiUrl, venta);
-  }
-
-  private guardarComprobante(venta: Venta): void {
-    console.log('Comprobante guardado', venta);
   }
 
   listarVentas(): Observable<Venta[]> {
@@ -80,12 +90,26 @@ export class VentasService {
 
     return this.http.get<Producto[]>(this.apiUrl, { params });
   }
+  obtenerVentasPorUsuario(): Observable<Venta[]> {
+    const usuarioActual = this.authService.obtenerToken();
+    if (!usuarioActual) {
+      return throwError('Usuario no autenticado. Inicie sesión para consultar ventas.');
+    }
+    return this.http.get<Venta[]>(`${this.apiUrl}?id_Usuario=${usuarioActual}`);
+  }
 
   obtenerVentasDelDia(fechaHoy: string): Observable<Venta[]> {
+    const usuarioActual = this.authService.obtenerToken();
+    if (!usuarioActual) {
+      return throwError('Usuario no autenticado. Inicie sesión para consultar ventas.');
+    }
+
     return this.listarVentas().pipe(
-      map((ventas: any[]) =>
+      map((ventas: Venta[]) =>
         ventas.filter(
-          venta => new Date(venta.fecha).toISOString().split('T')[0] === fechaHoy
+          venta =>
+            venta.id_Usuario === usuarioActual &&
+            new Date(venta.fecha).toISOString().split('T')[0] === fechaHoy
         )
       )
     );

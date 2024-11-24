@@ -9,7 +9,8 @@ import { AuthService } from '../service/product/Auth/usarios.service';
 export class NavbarComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
-  cerrarSesion() {
-   this.authService.cerrarSesion
+  cerrarSesion(): void {
+    this.authService.cerrarSesion();
+    this.router.navigate(['/login']);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../service/product/product/productos.service';
 import { Producto } from './producto.model';
+import { AuthService } from '../service/product/Auth/usarios.service';
 
 @Component({
   selector: 'app-productos',
@@ -9,7 +10,10 @@ import { Producto } from './producto.model';
 })
 export class ProductoComponent implements OnInit {
   productos: Producto[] = [];
-  producto: Producto = { id: '', nombre: '', categoria: '', precio: 0, stock: 0 };
+  producto: Producto = {
+    id: '', nombre: '', categoria: '', precio: 0, stock: 0,
+    id_Usuario: ''
+  };
   productoSeleccionado: Producto | null = null;
   limiteMinimoStock = 6; 
   productosConStockBajo: Producto[] = [];
@@ -17,7 +21,7 @@ export class ProductoComponent implements OnInit {
 
   criterioBusqueda: Partial<Producto> = { id: undefined, nombre: '', categoria: '' };
 
-  constructor(private productoService: ProductoService) {}
+  constructor(private productoService: ProductoService, private authService: AuthService) {}
 
   ngOnInit() {
     this.listarProductos();
@@ -35,19 +39,28 @@ export class ProductoComponent implements OnInit {
 
   agregarProducto() {
     if (this.formularioValido()) {
-      // Validación de ID único
-      this.productoService.buscarProductoPorId(this.producto.id).subscribe({
+      const idUsuario = this.authService.obtenerToken(); // Obtén el ID del usuario actual
+  
+      if (!idUsuario) {
+        console.error('Error: No se pudo obtener el ID del usuario desde el token.');
+        return;
+      }
+  
+      this.producto.id_Usuario = idUsuario; // Asigna el ID del usuario al producto
+  
+      // Validación de ID único para este usuario
+      this.productoService.buscarProductoPorIdYUsuario(this.producto.id, idUsuario).subscribe({
         next: (productosConId) => {
           if (productosConId.length > 0) {
-            console.error('Error: Ya existe un producto con el mismo ID.');
+            console.error('Error: Ya existe un producto con el mismo ID para este usuario.');
             return;
           }
   
-          // Validación de nombre único
-          this.productoService.buscarProductoPorNombre(this.producto.nombre).subscribe({
+          // Validación de nombre único para este usuario
+          this.productoService.buscarProductoPorNombreYUsuario(this.producto.nombre, idUsuario).subscribe({
             next: (productosConNombre) => {
               if (productosConNombre.length > 0) {
-                console.error('Error: Ya existe un producto con el mismo nombre.');
+                console.error('Error: Ya existe un producto con el mismo nombre para este usuario.');
                 return;
               }
   
@@ -69,6 +82,7 @@ export class ProductoComponent implements OnInit {
       console.error('Error: Complete todos los campos correctamente.');
     }
   }
+  
   
   verificarStockBajo() {
     this.productosConStockBajo = this.productos.filter(
@@ -96,7 +110,7 @@ export class ProductoComponent implements OnInit {
 
   guardarCambios() {
     if (this.productoSeleccionado) {
-      this.productoService.modificarProducto( parseInt(this.productoSeleccionado.id) , this.productoSeleccionado).subscribe({
+      this.productoService.modificarProducto( this.productoSeleccionado.id , this.productoSeleccionado).subscribe({
         next: () => {
           this.listarProductos();
           this.cerrarModal();
@@ -107,7 +121,7 @@ export class ProductoComponent implements OnInit {
   }
   
   eliminarProducto(producto: Producto) {
-    this.productoService.eliminarProducto(parseInt(producto.id)).subscribe({
+    this.productoService.eliminarProducto(producto.id).subscribe({
       next: () => this.listarProductos(),
       error: (error) => console.error('Error al eliminar producto:', error)
     });
@@ -126,10 +140,10 @@ export class ProductoComponent implements OnInit {
   }
   
   resetForm() {
-    this.producto = { id: '', nombre: '', categoria: '', precio: 0, stock: 0 };
+    this.producto = { id: '', nombre: '', categoria: '', precio: 0, stock: 0,id_Usuario:'' };
   }
 
-  productoId: number = 0;
+  productoId: string = '';
  cantidadStock: number = 0;
   cargarStock() {
     if (this.productoId && this.cantidadStock > 0) {

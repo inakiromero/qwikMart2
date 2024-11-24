@@ -10,7 +10,8 @@ export class ProveedoresComponent implements OnInit {
   proveedores: Proveedor[] = [];
   proveedor: Proveedor = {
     nombre: '', email: '', telefono: '', detalle: '',
-    id: 0
+    id: '',
+    id_Usuario: ''
   };
   proveedorSeleccionado: Proveedor | null = null;
 
@@ -54,7 +55,7 @@ export class ProveedoresComponent implements OnInit {
     }
   }
 
-  eliminarProveedor(id: number) {
+  eliminarProveedor(id: string) {
     this.proveedoresService.eliminarProveedor(id).subscribe({
       next: () => this.listarProveedores(),
       error: (error) => console.error('Error al eliminar proveedor:', error),
@@ -62,7 +63,7 @@ export class ProveedoresComponent implements OnInit {
   }
 
   resetForm() {
-    this.proveedor = { nombre: '', email: '', telefono: '', detalle: '',id:0 };// Restablece el formulario a su estado inicial
+    this.proveedor = { nombre: '', email: '', telefono: '', detalle: '',id:'', id_Usuario:'' };// Restablece el formulario a su estado inicial
   }
 
   cerrarModal() {

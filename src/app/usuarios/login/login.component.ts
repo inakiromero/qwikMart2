@@ -15,18 +15,10 @@ export class LoginComponent {
 
   iniciarSesion() {
     this.authService.iniciarSesion(this.email, this.password).subscribe({
-      next: (usuarios) => {
-        if (usuarios.length > 0) {
-          // Usuario encontrado
-          const usuario = usuarios[0];
-          this.authService.guardarToken(usuario.id); // Guardamos el ID como "token"
-          alert('Inicio de sesión exitoso');
-          this.router.navigate(['/productos']); // Redirigir a la página principal
-        } else {
-          alert('Correo o contraseña incorrectos');
-        }
+      next: () => {
+        this.router.navigate(['/productos']);
       },
-      error: (err) => console.error('Error al iniciar sesión:', err),
     });
+
   }
 }

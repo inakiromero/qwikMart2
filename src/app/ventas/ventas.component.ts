@@ -51,11 +51,11 @@ export class VentasComponent {
   }
 
   agregarProductoAVenta(producto: Producto): void {
-    const itemExistente = this.ventaItems.find(item => item.id === parseInt(producto.id ));
+    const itemExistente = this.ventaItems.find(item => item.id === producto.id );
     if (itemExistente) {
       itemExistente.cantidad++;
     } else {
-      this.ventaItems.push({ id: parseInt(producto.id), nombre: producto.nombre, precio: producto.precio, cantidad: 1 });
+      this.ventaItems.push({ id: producto.id, nombre: producto.nombre, precio: producto.precio, cantidad: 1 });
     }
   }
 

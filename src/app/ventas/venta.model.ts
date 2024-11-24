@@ -1,5 +1,5 @@
 export interface VentaItem {
-    id: number;
+    id: string;
     nombre: string;
     precio: number;
     cantidad: number;
@@ -11,5 +11,6 @@ export interface VentaItem {
     total: number;
     fecha: Date;
     tipoPago: 'Efectivo' | 'Tarjeta' | 'Transferencia QR'; 
+    id_Usuario:string;
 
   }

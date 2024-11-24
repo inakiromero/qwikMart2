@@ -5,23 +5,26 @@ import { Usuario } from '../usuario.model';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css'],
 })
 export class RegistroComponent {
   usuario: Usuario = {
-    id: '',
-    nombreMercado: '',
-    cuit: '',
-    email: '',
-    password: '',
+    nombreMercado: '', cuit: '', email: '', password: '',
   };
+  error: string | null = null;
 
   constructor(private authService: AuthService) {}
 
-  registrarUsuario() {
+  registrarUsuario(): void {
     this.authService.registrarUsuario(this.usuario).subscribe({
-      next: () => alert('Usuario registrado con éxito'),
-      error: (err) => console.error('Error al registrar usuario:', err),
+      next: () => {
+        alert('Usuario registrado con éxito.');
+        this.usuario = { nombreMercado: '', cuit: '', email: '', password: '' }; // Resetea el formulario
+        this.error = null;
+      },
+      error: (err) => {
+        this.error = err.message || 'Error al registrar usuario.';
+      },
     });
   }
+  
 }

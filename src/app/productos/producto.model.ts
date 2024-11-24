@@ -4,4 +4,5 @@ export interface Producto {
     categoria: string;
     precio: number;
     stock: number;
+    id_Usuario: string;
   }
