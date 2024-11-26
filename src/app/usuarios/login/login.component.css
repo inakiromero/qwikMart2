@@ -1,75 +1,75 @@
-login-container {
-    max-width: 400px;
-    margin: 50px auto;
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-  
-    h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 20px;
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
-    }
-    
-    label {
-      display: block;
-      margin-bottom: 5px;
-      color: #555;
-      font-weight: bold;
-    }
-    
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 14px;
-      box-sizing: border-box;
-    }
-    
-    input[type="email"]:focus,
-    input[type="password"]:focus {
-      border-color: #11ae81;
-      outline: none;
-      box-shadow: 0 0 5px rgba(17, 174, 129, 0.5);
-    }
-    
-    button {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #11ae81;
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    
-    button:hover {
-      background-color: #0e8d65;
-    }
-    
-    p {
-      text-align: center;
-      color: #555;
-      margin-top: 20px;
-    }
-    
-    a {
-      color: #11ae81;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    
-    a:hover {
-      text-decoration: underline;
-    }
+.login-container {
+  max-width: 400px;
+ margin: 50px auto;
+ background-color: #ffffff;
+ padding: 30px;
+ border-radius: 8px;
+ box-shadow: 0 0 10px rgba(0, 0, 0);
+}
+
+h2 {
+ text-align: center;
+ color: #333;
+ margin-bottom: 20px;
+}
+
+.form-group {
+ margin-bottom: 20px;
+}
+
+label {
+ display: block;
+ margin-bottom: 5px;
+ color: #555;
+ font-weight: bold;
+}
+
+input[type="email"],
+input[type="password"] {
+ width: 100%;
+ padding: 10px;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ font-size: 14px;
+ box-sizing: border-box;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+ border-color: #000000;
+ outline: none;
+ box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+button {
+ width: 100%;
+ padding: 10px;
+ border: none;
+ border-radius: 5px;
+ background-color: #2ec2f4;
+ color: #ffffff;
+ font-size: 16px;
+ font-weight: bold;
+ cursor: pointer;
+ transition: background-color 0.3s ease;
+}
+
+button:hover {
+ background-color: #0f65b6;
+}
+
+p {
+ text-align: center;
+ color: #555;
+ margin-top: 20px;
+}
+
+a {
+ color: #000000;
+ text-decoration: none;
+ font-weight: bold;
+}
+
+a:hover {
+ text-decoration: underline;
+}

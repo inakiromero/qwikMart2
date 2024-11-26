@@ -1,5 +1,5 @@
 nav {
-  background-color: #050404;
+  background: linear-gradient(90deg, #0e9ac5, #78ddff);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px 20px;
   position: sticky;

@@ -16,6 +16,12 @@ export class RegistroComponent {
   constructor(private authService: AuthService) {}
 
   registrarUsuario(): void {
+    // Verificar que todos los campos estén completados
+    if (!this.usuario.nombreMercado || !this.usuario.cuit || !this.usuario.email || !this.usuario.password) {
+      this.error = 'Todos los campos son obligatorios.';
+      return;
+    }
+  
     this.authService.registrarUsuario(this.usuario).subscribe({
       next: () => {
         alert('Usuario registrado con éxito.');
@@ -27,5 +33,6 @@ export class RegistroComponent {
       },
     });
   }
+  
   
 }
