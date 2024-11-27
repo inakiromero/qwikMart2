@@ -11,7 +11,7 @@ import { AuthService } from '../service/product/Auth/usarios.service';
 export class ProductoComponent implements OnInit {
   productos: Producto[] = [];
   producto: Producto = {
-    id: '', nombre: '', categoria: '', precio: 0, stock: 0,
+   nombre: '', categoria: '', precio: 0, stock: 0,
     id_Usuario: ''
   };
   productoSeleccionado: Producto | null = null;
@@ -46,16 +46,10 @@ export class ProductoComponent implements OnInit {
         return;
       }
   
-      this.producto.id_Usuario = idUsuario; // Asigna el ID del usuario al producto
+      
   
       // Validación de ID único para este usuario
-      this.productoService.buscarProductoPorIdYUsuario(this.producto.id, idUsuario).subscribe({
-        next: (productosConId) => {
-          if (productosConId.length > 0) {
-            console.error('Error: Ya existe un producto con el mismo ID para este usuario.');
-            return;
-          }
-  
+      
           // Validación de nombre único para este usuario
           this.productoService.buscarProductoPorNombreYUsuario(this.producto.nombre, idUsuario).subscribe({
             next: (productosConNombre) => {
@@ -75,9 +69,7 @@ export class ProductoComponent implements OnInit {
             },
             error: (error) => console.error('Error al buscar producto por nombre:', error),
           });
-        },
-        error: (error) => console.error('Error al buscar producto por ID:', error),
-      });
+        
     } else {
       console.error('Error: Complete todos los campos correctamente.');
     }
@@ -96,7 +88,6 @@ export class ProductoComponent implements OnInit {
 
   formularioValido(): boolean {
     return (
-      parseInt(this.producto.id) > 0 &&
       this.producto.nombre.trim() !== '' &&
       this.producto.categoria.trim() !== '' &&
       this.producto.precio > 0 &&
@@ -110,6 +101,11 @@ export class ProductoComponent implements OnInit {
 
   guardarCambios() {
     if (this.productoSeleccionado) {
+      if (!this.productoSeleccionado.id)
+        {
+          console.log("error al seleccionar producto")
+          return
+        }
       this.productoService.modificarProducto( this.productoSeleccionado.id , this.productoSeleccionado).subscribe({
         next: () => {
           this.listarProductos();
@@ -121,6 +117,11 @@ export class ProductoComponent implements OnInit {
   }
   
   eliminarProducto(producto: Producto) {
+    if (!producto.id)
+      {
+        console.log("error al seleccionar producto")
+        return
+      }
     this.productoService.eliminarProducto(producto.id).subscribe({
       next: () => this.listarProductos(),
       error: (error) => console.error('Error al eliminar producto:', error)
@@ -145,12 +146,19 @@ export class ProductoComponent implements OnInit {
 
   productoId: string = '';
  cantidadStock: number = 0;
+
+
   cargarStock() {
+    const idUsuario = this.authService.obtenerToken(); 
+  if (!idUsuario) {
+    console.error('El usuario no está autenticado.');
+    return;
+  }
     if (this.productoId && this.cantidadStock > 0) {
-      this.productoService.obtenerProductoPorId(this.productoId).subscribe({
+      this.productoService.obtenerProductoPorId(this.productoId,idUsuario).subscribe({
         next: (producto) => {
           const nuevoStock = producto.stock + this.cantidadStock;
-          this.productoService.actualizarStock(this.productoId, nuevoStock).subscribe({
+          this.productoService.actualizarStock(this.productoId, nuevoStock,idUsuario).subscribe({
             next: () => {
               console.log(`Stock actualizado para el producto ID ${this.productoId}`);
               this.listarProductos();

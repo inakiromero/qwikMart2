@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { map, Observable, switchMap, throwError } from 'rxjs';
 import { Producto } from '../../../productos/producto.model';
 import { VentaItem } from '../../../ventas/venta.model';
 import { AuthService } from '../Auth/usarios.service';
@@ -22,8 +22,15 @@ export class ProductoService {
     const params = new HttpParams().set('id_Usuario', token);
     return this.http.get<Producto[]>(this.apiUrl, { params });
   }
-  obtenerProductoPorId(id: string): Observable<Producto> {
-    return this.http.get<Producto>(`${this.apiUrl}/${id}`);
+  obtenerProductoPorId(id: string, idUsuario: string): Observable<Producto> {
+    return this.http.get<Producto[]>(`${this.apiUrl}?id=${id}&id_usuario=${idUsuario}`).pipe(
+      map((productos) => {
+        if (productos.length === 0) {
+          throw new Error('El producto no pertenece al usuario o no existe.');
+        }
+        return productos[0]; // Devuelve el producto si existe
+      })
+    );
   }
   buscarProductoPorIdYUsuario(id: string, idUsuario: string): Observable<Producto[]> {
     return this.http.get<Producto[]>(this.apiUrl, { params: { id, id_Usuario: idUsuario } });
@@ -65,8 +72,17 @@ export class ProductoService {
     return this.http.get<Producto[]>(this.apiUrl, { params });
   }
   
-  actualizarStock(id: string, cantidadVendida: number): Observable<Producto> {
-    return this.http.patch<Producto>(`${this.apiUrl}/${id}`, {  stock:cantidadVendida });
+  actualizarStock(id: string, cantidadVendida: number, idUsuario: string): Observable<Producto> {
+    return this.obtenerProductoPorId(id,idUsuario).pipe(
+      switchMap((producto) => {
+        // Validar que el producto pertenece al usuario autenticado
+        if (producto.id_Usuario !== idUsuario) {
+          return throwError(() => new Error('El producto no pertenece al usuario autenticado.'));
+        }
+        // Actualizar el stock si todo está correcto
+        return this.http.patch<Producto>(`${this.apiUrl}/${id}`, { stock: cantidadVendida });
+      })
+    );
   }
 
   generarComprobante(ventaItems: VentaItem[]): string {

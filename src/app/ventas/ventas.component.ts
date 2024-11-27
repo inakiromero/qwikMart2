@@ -51,7 +51,13 @@ export class VentasComponent {
   }
 
   agregarProductoAVenta(producto: Producto): void {
-    const itemExistente = this.ventaItems.find(item => item.id === producto.id );
+    
+    if (!producto?.id)
+      {
+        console.log("error al seleccionar producto")
+        return
+      }
+      const itemExistente = this.ventaItems.find(item => item.id === producto.id );
     if (itemExistente) {
       itemExistente.cantidad++;
     } else {

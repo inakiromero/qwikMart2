@@ -21,7 +21,7 @@
       "nombre": "fernet",
       "categoria": "alcohol",
       "precio": 10000,
-      "stock": 6,
+      "stock": 14,
       "id_Usuario": "1"
     },
     {
@@ -29,32 +29,48 @@
       "nombre": "amanda",
       "categoria": "yerba",
       "precio": 2000,
-      "stock": 17,
+      "stock": 22,
       "id_Usuario": "1"
     },
     {
       "id": "3",
-      "nombre": "fernet branca",
-      "categoria": "alcohol",
-      "precio": 10000,
-      "stock": 1,
+      "nombre": "bimbo 330g",
+      "categoria": "galletitas",
+      "precio": 1800,
+      "stock": 10,
       "id_Usuario": "2"
     },
     {
       "id": "4",
-      "nombre": "tody",
-      "categoria": "galletitas",
-      "precio": 1500,
-      "stock": 20,
+      "nombre": "fernet branca",
+      "categoria": "alcohol",
+      "precio": 10000,
+      "stock": 6,
       "id_Usuario": "2"
     },
     {
-      "id": "1",
-      "nombre": "bimbo 330g",
+      "id": "5",
+      "nombre": "tody",
       "categoria": "galletitas",
-      "precio": 10000,
+      "precio": 1500,
+      "stock": 25,
+      "id_Usuario": "2"
+    },
+    {
+      "id": "",
+      "nombre": "tang",
+      "categoria": "bebida",
+      "precio": 1000,
       "stock": 10,
       "id_Usuario": "2"
+    },
+    {
+      "id": "cc17",
+      "nombre": "tang",
+      "categoria": "bebida",
+      "precio": 1000,
+      "stock": 15,
+      "id_Usuario": "1"
     }
   ],
   "ventas": [
@@ -99,6 +115,21 @@
       "fecha": "2024-11-24T00:05:18.651Z",
       "tipoPago": "Transferencia QR",
       "id_Usuario": "1"
+    },
+    {
+      "id": "3cd5",
+      "items": [
+        {
+          "id": "1",
+          "nombre": "bimbo 330g",
+          "precio": 10000,
+          "cantidad": 3
+        }
+      ],
+      "total": 30000,
+      "fecha": "2024-11-27T18:15:02.691Z",
+      "tipoPago": "Transferencia QR",
+      "id_Usuario": "2"
     }
   ],
   "proveedores": [

@@ -3,24 +3,6 @@
 
   <form (ngSubmit)="agregarProducto()" #productoForm="ngForm">
     <h3>{{ producto.id ? 'Agregando producto...' : 'Agregar Producto' }}</h3>
-
-    <div class="form-group">
-      <label for="id">ID:</label>
-      <input 
-        type="text" 
-        id="id" 
-        [(ngModel)]="producto.id" 
-        name="id" 
-        required 
-        min="1" 
-        #id="ngModel" 
-        class="form-control" 
-      />
-      <div *ngIf="id.invalid && id.touched" class="text-danger">
-        El ID es obligatorio y debe ser un número positivo.
-      </div>
-    </div>
-
     <div class="form-group">
       <label for="nombre">Nombre:</label>
       <input 
@@ -196,7 +178,8 @@
     <h3>Cargar Stock</h3>
   <div>
     <label for="productoId">ID del Producto:</label>
-    <input type="number" [(ngModel)]="productoId" name="productoId" />
+    <input type="textç
+    " [(ngModel)]="productoId" name="productoId" />
   </div>
   <div>
     <label for="cantidad">Cantidad a agregar:</label>

@@ -20,16 +20,17 @@ export class VentasService {
   ) {}
 
   registrarVenta(
-    items: VentaItem[],
+    items: VentaItem[], 
     tipoPago: 'Efectivo' | 'Tarjeta' | 'Transferencia QR'
   ): Observable<Venta> {
     const token = this.authService.obtenerToken();
+    
     if (!token) {
       return throwError('Usuario no autenticado. Inicie sesión para continuar.');
     }
   
     const stockVerificacion$ = items.map((item) =>
-      this.productoService.obtenerProductoPorId(item.id).pipe(
+      this.productoService.obtenerProductoPorId(item.id, token).pipe(
         switchMap((producto: Producto) => {
           const nuevoStock = producto.stock - item.cantidad;
           if (nuevoStock >= 0) {
@@ -43,9 +44,14 @@ export class VentasService {
   
     return forkJoin(stockVerificacion$).pipe(
       switchMap((productosActualizados) => {
-        const actualizacionesStock$ = productosActualizados.map(({ producto, nuevoStock }) =>
-          this.productoService.actualizarStock(producto.id, nuevoStock)
-        );
+       
+        const actualizacionesStock$ = productosActualizados.map(({ producto, nuevoStock }) =>{
+          if(!producto.id)
+            {
+              return throwError('El producto no tiene un ID válido.');
+            }
+          return this.productoService.actualizarStock(producto.id, nuevoStock,token)
+      });
   
         const total = items.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
   
@@ -68,6 +74,7 @@ export class VentasService {
       })
     );
   }
+  
   
 
   private guardarVenta(venta: Venta): Observable<Venta> {
