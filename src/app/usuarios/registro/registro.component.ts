@@ -12,8 +12,15 @@ export class RegistroComponent {
     nombreMercado: '', cuit: '', email: '', password: '',
   };
   error: string | null = null;
+  emailInvalido: boolean = false;
+
 
   constructor(private authService: AuthService) {}
+
+  validarEmail(): void {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    this.emailInvalido = !emailRegex.test(this.usuario.email);
+  }
 
   registrarUsuario(): void {
     // Verificar que todos los campos estén completados
@@ -22,10 +29,17 @@ export class RegistroComponent {
       return;
     }
   
+    // Validar formato del correo electrónico
+    this.validarEmail();
+    if (this.emailInvalido) {
+      this.error = 'El correo electrónico no tiene un formato válido.';
+      return;
+    }
+  
     this.authService.registrarUsuario(this.usuario).subscribe({
       next: () => {
         alert('Usuario registrado con éxito.');
-        this.usuario = { nombreMercado: '', cuit: '', email: '', password: '' }; // Resetea el formulario
+        this.usuario = { nombreMercado: '', cuit: '', email: '', password: '' }; // Resetear el formulario
         this.error = null;
       },
       error: (err) => {

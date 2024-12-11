@@ -69,4 +69,8 @@ export class ProveedoresComponent implements OnInit {
   cerrarModal() {
     this.proveedorSeleccionado = null;
   }
+  isEmailValid(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 }

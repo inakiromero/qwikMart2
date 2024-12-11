@@ -1,33 +1,66 @@
 <div>
-    <h2>Cierre Diario</h2>
-    <p>Fecha: {{ fechaHoy }}</p>
-  
-    <div *ngIf="ventasDelDia.length > 0; else noVentas">
-      <h3>Desglose de Ventas por Producto</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Producto</th>
-            <th>Cantidad Vendida</th>
-            <th>Ingresos</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let producto of desglosePorProducto | keyvalue">
-            <td>{{ producto.key }}</td>
-            <td>{{ producto.value.cantidad }}</td>
-            <td>{{ producto.value.ingresos | currency }}</td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <h3>Total Ingresos: {{ totalIngresos | currency }}</h3>
-  
-      <button (click)="exportarPDF()">Exportar PDF</button>
-    </div>
-  
-    <ng-template #noVentas>
-      <p>No hay ventas registradas para el día de hoy.</p>
-    </ng-template>
+  <h2>Cierre de Ventas</h2>
+  <p>Fecha: {{ fechaHoy }}</p>
+
+  <!-- Selector de tipo de cierre -->
+  <div>
+    <label>
+      <input
+        type="radio"
+        name="tipoCierre"
+        value="diario"
+        [(ngModel)]="tipoCierre"
+        (change)="obtenerVentas()"
+      />
+      Diario
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="tipoCierre"
+        value="mensual"
+        [(ngModel)]="tipoCierre"
+        (change)="obtenerVentas()"
+      />
+      Mensual
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="tipoCierre"
+        value="anual"
+        [(ngModel)]="tipoCierre"
+        (change)="obtenerVentas()"
+      />
+      Anual
+    </label>
   </div>
-  
+
+  <div *ngIf="ventas.length > 0; else noVentas">
+    <h3>Desglose de Ventas por Producto</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad Vendida</th>
+          <th>Ingresos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of desglosePorProducto | keyvalue">
+          <td>{{ producto.key }}</td>
+          <td>{{ producto.value.cantidad }}</td>
+          <td>{{ producto.value.ingresos | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Total Ingresos: {{ totalIngresos | currency }}</h3>
+
+    <button (click)="exportarPDF()">Exportar PDF</button>
+  </div>
+
+  <ng-template #noVentas>
+    <p>No hay ventas registradas para este período.</p>
+  </ng-template>
+</div>

@@ -46,11 +46,13 @@
         id="email"
         class="form-control"
         [(ngModel)]="usuario.email"
+        (ngModelChange)="validarEmail()"
         name="email"
         required
       />
-      <div *ngIf="!usuario.email && error" class="text-danger">
-        El correo electrónico es obligatorio.
+      <!-- Mostrar error si el correo no tiene formato válido -->
+      <div *ngIf="emailInvalido" class="text-danger">
+        El correo electrónico no tiene un formato válido.
       </div>
     </div>
 

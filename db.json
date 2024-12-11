@@ -37,7 +37,7 @@
       "nombre": "bimbo 330g",
       "categoria": "galletitas",
       "precio": 1800,
-      "stock": 10,
+      "stock": 5,
       "id_Usuario": "2"
     },
     {
@@ -45,23 +45,7 @@
       "nombre": "fernet branca",
       "categoria": "alcohol",
       "precio": 10000,
-      "stock": 6,
-      "id_Usuario": "2"
-    },
-    {
-      "id": "5",
-      "nombre": "tody",
-      "categoria": "galletitas",
-      "precio": 1500,
-      "stock": 25,
-      "id_Usuario": "2"
-    },
-    {
-      "id": "",
-      "nombre": "tang",
-      "categoria": "bebida",
-      "precio": 1000,
-      "stock": 10,
+      "stock": 2,
       "id_Usuario": "2"
     },
     {
@@ -129,6 +113,54 @@
       "total": 30000,
       "fecha": "2024-11-27T18:15:02.691Z",
       "tipoPago": "Transferencia QR",
+      "id_Usuario": "2"
+    },
+    {
+      "id": "5a5d",
+      "items": [
+        {
+          "id": "4",
+          "nombre": "fernet branca",
+          "precio": 10000,
+          "cantidad": 2
+        },
+        {
+          "id": "5",
+          "nombre": "tody",
+          "precio": 1500,
+          "cantidad": 4
+        },
+        {
+          "id": "3",
+          "nombre": "bimbo 330g",
+          "precio": 1800,
+          "cantidad": 3
+        }
+      ],
+      "total": 31400,
+      "fecha": "2024-12-10T18:16:19.692Z",
+      "tipoPago": "Tarjeta",
+      "id_Usuario": "2"
+    },
+    {
+      "id": "5b0c",
+      "items": [
+        {
+          "id": "3",
+          "nombre": "bimbo 330g",
+          "precio": 1800,
+          "cantidad": 2
+        },
+        {
+          "id": "4",
+          "nombre": "fernet branca",
+          "precio": 10000,
+          "cantidad": 2
+        }
+      ],
+      "total": 23600,
+      "fecha": "2024-12-10T18:18:21.418Z",
+      "tipoPago": "Efectivo",
       "id_Usuario": "2"
     }
   ],

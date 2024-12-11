@@ -81,7 +81,12 @@
       <tr *ngFor="let proveedor of proveedores">
         <td>{{ proveedor.id }}</td>
         <td>{{ proveedor.nombre }}</td>
-        <td>{{ proveedor.email }}</td>
+        <td *ngIf="isEmailValid(proveedor.email)">
+          <a [href]="'mailto:' + proveedor.email" class="btn btn-link">
+            {{ proveedor.email }}
+          </a>
+        </td>
+        <td *ngIf="!isEmailValid(proveedor.email)">No disponible</td>
         <td>{{ proveedor.telefono }}</td>
         <td>{{ proveedor.detalle }}</td>
         <td>
