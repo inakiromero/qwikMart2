@@ -38,8 +38,9 @@ export class ProveedoresService {
       switchMap(() => this.http.post<any>(this.apiUrl, proveedor))
     );
   }
-  modificarProveedor(id: string, proveedor: Proveedor): Observable<Proveedor> {
-    return this.http.put<Proveedor>(`${this.apiUrl}/${id}`, proveedor);
+  modificarProveedor(id: string, proveedor: Proveedor, idUsuario: string): Observable<Proveedor> {
+    const payload = { ...proveedor, id_Usuario: idUsuario };
+    return this.http.put<Proveedor>(`${this.apiUrl}/${id}`, payload);
   }
 
   eliminarProveedor(id: string): Observable<void> {

@@ -44,8 +44,8 @@ export class ProveedoresComponent implements OnInit {
   }
 
   guardarCambios() {
-    if (this.proveedorSeleccionado && this.proveedorSeleccionado.id) {
-      this.proveedoresService.modificarProveedor(this.proveedorSeleccionado.id, this.proveedorSeleccionado).subscribe({
+    if (this.proveedorSeleccionado && this.proveedorSeleccionado.id && this.proveedorSeleccionado.id_Usuario) {
+      this.proveedoresService.modificarProveedor(this.proveedorSeleccionado.id, this.proveedorSeleccionado,this.proveedorSeleccionado.id_Usuario).subscribe({
         next: () => {
           this.listarProveedores();
           this.cerrarModal();
