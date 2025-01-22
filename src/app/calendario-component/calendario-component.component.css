@@ -1,0 +1,33 @@
+.calendario-container {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .lista-eventos {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .evento {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .indicador {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .amarillo {
+    color: yellow;
+  }
+  
+  .rojo {
+    color: red;
+  }
+  

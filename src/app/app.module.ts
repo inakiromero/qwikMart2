@@ -15,6 +15,7 @@ import { RegistroComponent } from './usuarios/registro/registro.component';
 
 import { AuthGuard } from './guard/auth.guard';
 import { PerfilComponent } from './usuarios/perfil/perfil.component';
+import { CalendarioComponent } from './calendario-component/calendario-component.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
     CierreDiarioComponent,
     LoginComponent,
     RegistroComponent,
-    PerfilComponent
+    PerfilComponent,
+    CalendarioComponent
   ],
   imports: [
     BrowserModule,
