@@ -26,7 +26,9 @@ const routes: Routes = [
   { path: 'ventas', component: VentasComponent, canActivate: [AuthGuard] }, 
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard] },
-  { path: 'cierreDiarios', component: CierreDiarioComponent, canActivate: [AuthGuard] }
+  { path: 'cierreDiarios', component: CierreDiarioComponent, canActivate: [AuthGuard] },
+  { path: 'calendario', component: CalendarioComponent, canActivate: [AuthGuard] }
+
 ];
 
 @NgModule({

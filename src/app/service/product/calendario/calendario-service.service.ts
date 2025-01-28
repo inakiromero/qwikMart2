@@ -1,37 +1,43 @@
 
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 import { Evento } from '../../../calendario-component/calendario.model';
 import { v4 as uuidv4 } from 'uuid';
-
 @Injectable({
   providedIn: 'root',
 })
 export class CalendarioService {
-  private eventos: Evento[] = [];
-  private eventosSubject = new BehaviorSubject<Evento[]>([]);
+  private apiUrl = 'http://localhost:3000/eventos'; // URL de json-server
+  
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  obtenerEventos(): Observable<Evento[]> {
-    return this.eventosSubject.asObservable();
+  // Obtener eventos por usuario
+  getEventosByUsuario(idUsuario: string): Observable<Evento[]> {
+    return this.http
+      .get<Evento[]>(`${this.apiUrl}?idUsuario=${idUsuario}`)
+      .pipe(
+        map((eventos) =>
+          eventos.map((evento) => ({
+            ...evento,
+            fecha: new Date(evento.fecha), // Convertir fecha a objeto Date
+          }))
+        )
+      );
   }
 
-  agregarEvento(evento: Omit<Evento, 'id'>): void {
-    const nuevoEvento: Evento = { id: uuidv4(), ...evento };
-    this.eventos.push(nuevoEvento);
-    this.eventosSubject.next(this.eventos);
+  // Crear un evento
+  crearEvento(evento: Evento): Observable<Evento> {
+    evento.id = uuidv4(); // Generar un ID único
+    return this.http.post<Evento>(this.apiUrl, evento);
   }
 
-  eliminarEvento(id: string): void {
-    this.eventos = this.eventos.filter(evento => evento.id !== id);
-    this.eventosSubject.next(this.eventos);
-  }
-
-  filtrarEventosPorDia(dia: string): Evento[] {
-    return this.eventos.filter(evento => {
-      const eventoDia = evento.fecha.toISOString().split('T')[0];
-      return eventoDia === dia;
-    });
+  // Eliminar un evento
+  eliminarEvento(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+  
+
+

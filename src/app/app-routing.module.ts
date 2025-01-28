@@ -8,6 +8,7 @@ import { RegistroComponent } from './usuarios/registro/registro.component';
 import { PerfilComponent } from './usuarios/perfil/perfil.component';
 import { LoginComponent } from './usuarios/login/login.component';
 import { AuthGuard } from './guard/auth.guard';
+import { CalendarioComponent } from './calendario-component/calendario-component.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/productos', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'registro', component: RegistroComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'calendario', component: CalendarioComponent, canActivate: [AuthGuard] },
 ];
 
 

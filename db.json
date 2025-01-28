@@ -173,5 +173,13 @@
       "detalle": "bebida marca coca",
       "id_Usuario": "1"
     }
+  ],
+  "eventos": [
+    {
+      "id": "f8def1ba-4b22-4aff-aed3-67e254f0e73b",
+      "fecha": "2025-01-28T16:30",
+      "descripcion": "proveedor de coca cola trae productos  ",
+      "id_usuario": "1"
+    }
   ]
 }
