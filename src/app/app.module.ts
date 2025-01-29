@@ -12,10 +12,12 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { CierreDiarioComponent } from './cierre-diario/cierre-diario.component';
 import { LoginComponent } from './usuarios/login/login.component';
 import { RegistroComponent } from './usuarios/registro/registro.component';
+import { CalendarioComponent } from './calendario-component/calendario-component.component';
+import { registroVentasComponent } from './registo-ventas/registo-ventas.component';
 
 import { AuthGuard } from './guard/auth.guard';
 import { PerfilComponent } from './usuarios/perfil/perfil.component';
-import { CalendarioComponent } from './calendario-component/calendario-component.component';
+
 
 
 const routes: Routes = [
@@ -27,7 +29,9 @@ const routes: Routes = [
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard] },
   { path: 'cierreDiarios', component: CierreDiarioComponent, canActivate: [AuthGuard] },
-  { path: 'calendario', component: CalendarioComponent, canActivate: [AuthGuard] }
+  { path: 'calendario', component: CalendarioComponent, canActivate: [AuthGuard] },
+  { path: 'registroVentas', component: registroVentasComponent, canActivate: [AuthGuard] }
+
 
 ];
 
@@ -42,7 +46,8 @@ const routes: Routes = [
     LoginComponent,
     RegistroComponent,
     PerfilComponent,
-    CalendarioComponent
+    CalendarioComponent,
+    registroVentasComponent
   ],
   imports: [
     BrowserModule,
