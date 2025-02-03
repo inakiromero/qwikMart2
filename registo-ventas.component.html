@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <h2>Listado de Ventas</h2>
+  
+    <!-- Filtro por fecha -->
+    <div class="mb-3">
+      <label for="fechaFiltro" class="form-label">Filtrar por fecha:</label>
+      <input type="date" id="fechaFiltro" class="form-control" [(ngModel)]="fechaFiltro" (change)="filtrarPorFecha()">
+    </div>
+  
+    <!-- Tabla de ventas -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Total</th>
+          <th>Tipo de Pago</th>
+          <th>Productos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor= "let venta of ventas" >
+          <td>{{ venta.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ venta.total | currency }}</td>
+          <td>{{ venta.tipoPago }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let item of venta.items">
+                {{ item.nombre }} x{{ item.cantidad }} - {{ item.precio | currency }}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

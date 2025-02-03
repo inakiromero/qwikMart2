@@ -1,0 +1,58 @@
+<div class="container">
+  <h2>Eventos</h2>
+
+  <!-- Formulario para agregar eventos -->
+  <form (ngSubmit)="agregarEvento()">
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <input
+        type="text"
+        id="descripcion"
+        class="form-control"
+        [(ngModel)]="nuevoEvento.descripcion"
+        name="descripcion"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="fecha">Fecha</label>
+      <input
+        type="datetime-local"
+        id="fecha"
+        class="form-control"
+        [(ngModel)]="nuevoEvento.fecha"
+        name="fecha"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Agregar Evento</button>
+  </form>
+
+  <!-- Lista de eventos -->
+  
+</div><div class="calendario-container">
+  <h2>Calendario de Eventos</h2>
+
+  <div *ngIf="eventos.length === 0" class="alert alert-info">
+    No hay eventos programados.
+  </div>
+
+  <div *ngFor="let evento of eventos" class="evento-card">
+    <!-- Aviso visual -->
+    <div
+      class="aviso"
+      [ngClass]="{ 'amarillo': esMismoDia(evento), 'rojo': faltaUnaHora(evento) }"
+    ></div>
+
+    <!-- Detalles del evento -->
+    <div class="evento-detalle">
+      <h3>{{ evento.descripcion }}</h3>
+      <p>Fecha: {{ evento.fecha | date: 'short' }}</p>
+      <button class="btn btn-danger btn-sm" (click)="eliminarEvento(evento.id)">
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
+  
