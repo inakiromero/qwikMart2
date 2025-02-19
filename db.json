@@ -13,6 +13,20 @@
       "cuit": "2012322233342",
       "email": "mercalito@hotmail.com",
       "password": "1233"
+    },
+    {
+      "id": "cff5",
+      "nombreMercado": "juanMercado",
+      "cuit": "2044556677882",
+      "email": "mercado@gmail.com",
+      "password": "112233"
+    },
+    {
+      "id": "250f",
+      "nombreMercado": "julioMercado",
+      "cuit": "20123456782",
+      "email": "MercadoJ@hotmail.com",
+      "password": "12345"
     }
   ],
   "productos": [
@@ -55,6 +69,22 @@
       "precio": 1000,
       "stock": 14,
       "id_Usuario": "1"
+    },
+    {
+      "id": "7271",
+      "nombre": "Fernet Branca ",
+      "categoria": "bebida",
+      "precio": 12000,
+      "stock": 9,
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "2f0c",
+      "nombre": "cachafaz ",
+      "categoria": "alfajores ",
+      "precio": 3000,
+      "stock": 28,
+      "id_Usuario": "250f"
     }
   ],
   "ventas": [
@@ -189,6 +219,27 @@
       "fecha": "2025-02-03T15:26:03.736Z",
       "tipoPago": "Transferencia QR",
       "id_Usuario": "1"
+    },
+    {
+      "id": "03e1",
+      "items": [
+        {
+          "id": "2f0c",
+          "nombre": "cachafaz ",
+          "precio": 3000,
+          "cantidad": 2
+        },
+        {
+          "id": "7271",
+          "nombre": "Fernet Branca ",
+          "precio": 12000,
+          "cantidad": 1
+        }
+      ],
+      "total": 18000,
+      "fecha": "2025-02-19T15:35:20.809Z",
+      "tipoPago": "Efectivo",
+      "id_Usuario": "250f"
     }
   ],
   "proveedores": [
@@ -199,14 +250,46 @@
       "telefono": "2235942151",
       "detalle": "bebida marca coca",
       "id_Usuario": "1"
+    },
+    {
+      "id": "d863",
+      "nombre": "pablo alfajor",
+      "email": "Palfajores@hotmail.com",
+      "telefono": "223 389 9112",
+      "detalle": "alfajores y masitas ",
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "e30d",
+      "nombre": "juan Quilmes",
+      "email": "QuilmesCompany@hotmail.com",
+      "telefono": "223 229 3121",
+      "detalle": "cervezas Quilmes ",
+      "id_Usuario": "2"
+    },
+    {
+      "id": "37be",
+      "nombre": "jorge ",
+      "email": "jorg@hotmail.com",
+      "telefono": "221 992 1312",
+      "detalle": "panaderia ",
+      "id_Usuario": "2"
+    },
+    {
+      "id": "efaa",
+      "nombre": "pablo Limpieza ",
+      "email": "LimpiadoresPablos@hotmail.com",
+      "telefono": "229 991 9291",
+      "detalle": "productos de limpieza ",
+      "id_Usuario": "2"
     }
   ],
   "eventos": [
     {
-      "id": "f8def1ba-4b22-4aff-aed3-67e254f0e73b",
-      "fecha": "2025-01-28T16:30",
-      "descripcion": "proveedor de coca cola trae productos  ",
-      "id_usuario": "1"
+      "id": "97acb4f2-bdf9-407b-8116-b88bbf1c34fe",
+      "fecha": "2025-02-19T16:00",
+      "descripcion": "presentacion ",
+      "id_usuario": "250f"
     }
   ]
 }

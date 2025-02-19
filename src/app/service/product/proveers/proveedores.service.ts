@@ -23,19 +23,25 @@ export class ProveedoresService {
   }
   
   agregarProveedor(proveedor: any): Observable<any> {
+    const token = this.authService.obtenerToken();
+    if (!token) {
+      return throwError('Usuario no autenticado. Inicie sesión para continuar.');
+    }
+  
+    const proveedorConUsuario = { ...proveedor, id_Usuario: token };
     return this.http.get<any[]>(this.apiUrl).pipe(
       map((proveedores) => {
         const existeProveedor = proveedores.some(
           (p) => p.email === proveedor.email || p.nombre === proveedor.nombre
         );
-
+  
         if (existeProveedor) {
           throw new Error('El proveedor ya existe con el mismo email o nombre.');
         }
-        return proveedor;
+        return proveedorConUsuario;
       }),
       catchError((error) => throwError(error)),
-      switchMap(() => this.http.post<any>(this.apiUrl, proveedor))
+      switchMap((nuevoProveedor) => this.http.post<any>(this.apiUrl, nuevoProveedor))
     );
   }
   modificarProveedor(id: string, proveedor: Proveedor, idUsuario: string): Observable<Proveedor> {
