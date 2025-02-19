@@ -23,14 +23,7 @@ export class CalendarioComponent implements OnInit {
     this.cargarEventos();
   }
    cargarEventos(): void {
-    const idUsuario = this.authService.obtenerToken(); // Obtén el ID del usuario actual
-    if (!idUsuario) {
-      console.error('Error: No se pudo obtener el ID del usuario desde el token.');
-      return;
-    }
-
-
-    this.calendarioService.getEventosByUsuario(idUsuario).subscribe({
+    this.calendarioService.getEventosByUsuario().subscribe({
       next: (eventos) => {
         this.eventos = eventos;
       },
@@ -41,20 +34,18 @@ export class CalendarioComponent implements OnInit {
   }
 
   agregarEvento(): void {
-
-    const idUsuario = this.authService.obtenerToken(); // Obtén el ID del usuario actual
+    const idUsuario = this.authService.obtenerToken();
     if (!idUsuario) {
       console.error('Error: No se pudo obtener el ID del usuario desde el token.');
       return;
     }
-
-
+  
     if (this.nuevoEvento.descripcion && this.nuevoEvento.fecha) {
-      this.nuevoEvento.id_usuario = idUsuario; // Asociar evento al usuario actual
+      this.nuevoEvento.id_usuario = idUsuario; // Asegurar que usa `id_usuario`
       this.calendarioService.crearEvento(this.nuevoEvento).subscribe({
         next: (eventoCreado) => {
-          this.eventos.push(eventoCreado); // Agregar el nuevo evento a la lista
-          this.nuevoEvento = { id: '', fecha: new Date, descripcion: '', id_usuario: idUsuario }; // Limpiar formulario
+          this.eventos.push(eventoCreado);
+          this.nuevoEvento = { id: '', fecha: new Date(), descripcion: '', id_usuario: idUsuario }; // Limpiar formulario
         },
         error: (err) => {
           console.error('Error al agregar evento:', err);
@@ -62,6 +53,7 @@ export class CalendarioComponent implements OnInit {
       });
     }
   }
+  
 
   eliminarEvento(id: string): void {
     this.calendarioService.eliminarEvento(id).subscribe({
