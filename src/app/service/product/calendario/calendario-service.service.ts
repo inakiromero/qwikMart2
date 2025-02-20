@@ -38,7 +38,7 @@ export class CalendarioService {
       return throwError('Usuario no autenticado. Inicie sesión para continuar.');
     }
   
-    const eventoConUsuario = { ...evento, id_usuario: token }; // Usar `id_usuario`
+    const eventoConUsuario = { ...evento,id: uuidv4(), id_usuario: token }; // Usar `id_usuario`
     return this.http.post<Evento>(this.apiUrl, eventoConUsuario);
   }
   // Eliminar un evento

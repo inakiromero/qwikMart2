@@ -27,6 +27,13 @@
       "cuit": "20123456782",
       "email": "MercadoJ@hotmail.com",
       "password": "12345"
+    },
+    {
+      "id": "32c8",
+      "nombreMercado": "mm",
+      "cuit": "203912",
+      "email": "Mercado@hotmail.com",
+      "password": "12345"
     }
   ],
   "productos": [
@@ -117,6 +124,22 @@
       "precio": 10000,
       "stock": 8,
       "id_Usuario": "250f"
+    },
+    {
+      "id": "98c9",
+      "nombre": "pepitas",
+      "categoria": "galletitas",
+      "precio": 1800,
+      "stock": 8,
+      "id_Usuario": "32c8"
+    },
+    {
+      "id": "03b4",
+      "nombre": "milanesas 2kg",
+      "categoria": "fiambreria",
+      "precio": 10000,
+      "stock": 9,
+      "id_Usuario": "32c8"
     }
   ],
   "ventas": [
@@ -452,6 +475,27 @@
       "fecha": "2025-02-20T16:35:11.199Z",
       "tipoPago": "Efectivo",
       "id_Usuario": "250f"
+    },
+    {
+      "id": "16f1",
+      "items": [
+        {
+          "id": "98c9",
+          "nombre": "pepitas",
+          "precio": 1800,
+          "cantidad": 2
+        },
+        {
+          "id": "03b4",
+          "nombre": "milanesas 2kg",
+          "precio": 10000,
+          "cantidad": 1
+        }
+      ],
+      "total": 13600,
+      "fecha": "2025-02-20T18:01:32.441Z",
+      "tipoPago": "Efectivo",
+      "id_Usuario": "32c8"
     }
   ],
   "proveedores": [
