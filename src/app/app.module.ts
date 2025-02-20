@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { ProductoComponent } from './productos/productos.component';
@@ -17,6 +18,7 @@ import { registroVentasComponent } from './registo-ventas/registo-ventas.compone
 
 import { AuthGuard } from './guard/auth.guard';
 import { PerfilComponent } from './usuarios/perfil/perfil.component';
+import { ConfirmacionDialogoComponent } from './shared/components/confirmacion-dialogo/confirmacion-dialogo.component';
 
 
 
@@ -47,13 +49,16 @@ const routes: Routes = [
     RegistroComponent,
     PerfilComponent,
     CalendarioComponent,
-    registroVentasComponent
+    registroVentasComponent,
+    ConfirmacionDialogoComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatDialogModule, // Agregar módulo de diálogos
+
   ],
   providers: [
     AuthGuard, // Proveedor del guard

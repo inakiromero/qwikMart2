@@ -75,7 +75,7 @@
       "nombre": "Fernet Branca ",
       "categoria": "bebida",
       "precio": 12000,
-      "stock": 9,
+      "stock": 17,
       "id_Usuario": "250f"
     },
     {
@@ -83,7 +83,39 @@
       "nombre": "cachafaz ",
       "categoria": "alfajores ",
       "precio": 3000,
-      "stock": 28,
+      "stock": 21,
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "c8c3",
+      "nombre": "tang",
+      "categoria": "bebida",
+      "precio": 2000,
+      "stock": 10,
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "cfea",
+      "nombre": "bimbo 330g",
+      "categoria": "pan",
+      "precio": 3000,
+      "stock": 18,
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "d757",
+      "nombre": "pepitas",
+      "categoria": "galletitas",
+      "precio": 1800,
+      "stock": 12,
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "7fff",
+      "nombre": "milanesas 2kg",
+      "categoria": "fiambreria",
+      "precio": 10000,
+      "stock": 8,
       "id_Usuario": "250f"
     }
   ],
@@ -240,6 +272,186 @@
       "fecha": "2025-02-19T15:35:20.809Z",
       "tipoPago": "Efectivo",
       "id_Usuario": "250f"
+    },
+    {
+      "id": "3b20",
+      "items": [
+        {
+          "id": "7271",
+          "nombre": "Fernet Branca ",
+          "precio": 12000,
+          "cantidad": 1
+        },
+        {
+          "id": "2f0c",
+          "nombre": "cachafaz ",
+          "precio": 3000,
+          "cantidad": 2
+        }
+      ],
+      "total": 18000,
+      "fecha": "2025-02-20T14:12:52.208Z",
+      "tipoPago": "Efectivo",
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "6c04",
+      "items": [
+        {
+          "id": "2f0c",
+          "nombre": "cachafaz ",
+          "precio": 3000,
+          "cantidad": 1
+        },
+        {
+          "id": "7271",
+          "nombre": "Fernet Branca ",
+          "precio": 12000,
+          "cantidad": 3
+        }
+      ],
+      "total": 39000,
+      "fecha": "2025-02-20T14:18:20.247Z",
+      "tipoPago": "Tarjeta",
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "b07f",
+      "items": [
+        {
+          "id": "7271",
+          "nombre": "Fernet Branca ",
+          "precio": 12000,
+          "cantidad": 9
+        }
+      ],
+      "total": 108000,
+      "fecha": "2025-02-20T14:52:50.630Z",
+      "tipoPago": "Transferencia QR",
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "b55b",
+      "items": [
+        {
+          "id": "7271",
+          "nombre": "Fernet Branca ",
+          "precio": 12000,
+          "cantidad": 1
+        },
+        {
+          "id": "7fff",
+          "nombre": "milanesas 2kg",
+          "precio": 10000,
+          "cantidad": 1
+        }
+      ],
+      "total": 22000,
+      "fecha": "2025-02-20T16:06:04.140Z",
+      "tipoPago": "Efectivo",
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "2fb7",
+      "items": [
+        {
+          "id": "2f0c",
+          "nombre": "cachafaz ",
+          "precio": 3000,
+          "cantidad": 1
+        },
+        {
+          "id": "7fff",
+          "nombre": "milanesas 2kg",
+          "precio": 10000,
+          "cantidad": 1
+        },
+        {
+          "id": "cfea",
+          "nombre": "bimbo 330g",
+          "precio": 3000,
+          "cantidad": 2
+        }
+      ],
+      "total": 19000,
+      "fecha": "2025-02-20T16:13:15.945Z",
+      "tipoPago": "Efectivo",
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "4380",
+      "items": [
+        {
+          "id": "2f0c",
+          "nombre": "cachafaz ",
+          "precio": 3000,
+          "cantidad": 2
+        }
+      ],
+      "total": 6000,
+      "fecha": "2025-02-20T16:14:38.236Z",
+      "tipoPago": "Efectivo",
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "4d20",
+      "items": [
+        {
+          "id": "7271",
+          "nombre": "Fernet Branca ",
+          "precio": 12000,
+          "cantidad": 1
+        }
+      ],
+      "total": 12000,
+      "fecha": "2025-02-20T16:18:54.055Z",
+      "tipoPago": "Efectivo",
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "f6d3",
+      "items": [
+        {
+          "id": "7271",
+          "nombre": "Fernet Branca ",
+          "precio": 12000,
+          "cantidad": 1
+        }
+      ],
+      "total": 12000,
+      "fecha": "2025-02-20T16:21:56.032Z",
+      "tipoPago": "Efectivo",
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "0da0",
+      "items": [
+        {
+          "id": "7271",
+          "nombre": "Fernet Branca ",
+          "precio": 12000,
+          "cantidad": 1
+        }
+      ],
+      "total": 12000,
+      "fecha": "2025-02-20T16:24:23.952Z",
+      "tipoPago": "Efectivo",
+      "id_Usuario": "250f"
+    },
+    {
+      "id": "5f0a",
+      "items": [
+        {
+          "id": "2f0c",
+          "nombre": "cachafaz ",
+          "precio": 3000,
+          "cantidad": 1
+        }
+      ],
+      "total": 3000,
+      "fecha": "2025-02-20T16:35:11.199Z",
+      "tipoPago": "Efectivo",
+      "id_Usuario": "250f"
     }
   ],
   "proveedores": [
@@ -284,12 +496,5 @@
       "id_Usuario": "2"
     }
   ],
-  "eventos": [
-    {
-      "id": "97acb4f2-bdf9-407b-8116-b88bbf1c34fe",
-      "fecha": "2025-02-19T16:00",
-      "descripcion": "presentacion ",
-      "id_usuario": "250f"
-    }
-  ]
+  "eventos": []
 }

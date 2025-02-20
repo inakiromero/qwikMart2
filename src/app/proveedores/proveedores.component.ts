@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Proveedor } from './proveedor.model';
 import { ProveedoresService } from '../service/product/proveers/proveedores.service'
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmacionDialogoComponent } from '../shared/components/confirmacion-dialogo/confirmacion-dialogo.component';
 @Component({
   selector: 'app-proveedores',
   templateUrl: './proveedores.component.html',
@@ -15,7 +17,7 @@ export class ProveedoresComponent implements OnInit {
   };
   proveedorSeleccionado: Proveedor | null = null;
 
-  constructor(private proveedoresService: ProveedoresService) {}
+  constructor(private proveedoresService: ProveedoresService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.listarProveedores();
@@ -55,10 +57,19 @@ export class ProveedoresComponent implements OnInit {
     }
   }
 
-  eliminarProveedor(id: string) {
-    this.proveedoresService.eliminarProveedor(id).subscribe({
-      next: () => this.listarProveedores(),
-      error: (error) => console.error('Error al eliminar proveedor:', error),
+  eliminarProveedor(id: string): void {
+    const dialogRef = this.dialog.open(ConfirmacionDialogoComponent, {
+      width: '350px',
+      data: { mensaje: '¿Estás seguro de que quieres eliminar este proveedor?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(resultado => {
+      if (resultado) {
+        this.proveedoresService.eliminarProveedor(id).subscribe({
+          next: () => this.listarProveedores(),
+          error: (error) => console.error('Error al eliminar proveedor:', error)
+        });
+      }
     });
   }
 

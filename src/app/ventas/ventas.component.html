@@ -65,12 +65,7 @@
 
   <div class="form-group">
     <label for="tipoPago">Tipo de Pago</label>
-    <select
-      id="tipoPago"
-      class="form-control"
-      [(ngModel)]="tipoPago"
-      required
-    >
+    <select id="tipoPago" class="form-control" [(ngModel)]="tipoPago" required>
       <option value="" disabled selected>Seleccione un tipo de pago</option>
       <option value="Efectivo">Efectivo</option>
       <option value="Tarjeta">Tarjeta</option>
@@ -78,14 +73,21 @@
     </select>
   </div>
   
+  <!-- Mensaje de error si no se selecciona método de pago -->
+  
+  
   <div class="form-group text-center">
     <button
       class="btn btn-success"
-      [disabled]="!tipoPago || ventaItems.length === 0"
+      [disabled]="ventaItems.length === 0"
       (click)="procesarVenta()"
     >
       Procesar Venta
     </button>
+    <div *ngIf="mensajeErrorPago" class="mensaje-error">
+      {{ mensajeErrorPago }}
+    </div>
   </div>
-
- 
+    <div *ngIf="mensajeErrorStock" class="mensaje-error">
+    {{ mensajeErrorStock }}
+  </div>

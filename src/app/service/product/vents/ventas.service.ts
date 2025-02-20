@@ -24,11 +24,12 @@ export class VentasService {
     tipoPago: 'Efectivo' | 'Tarjeta' | 'Transferencia QR'
   ): Observable<Venta> {
     const token = this.authService.obtenerToken();
-
+  
     if (!token) {
-      return throwError('Usuario no autenticado. Inicie sesión para continuar.');
+      return throwError(() => new Error('Usuario no autenticado. Inicie sesión para continuar.'));
     }
-
+  
+    // Verificación de stock de cada producto
     const stockVerificacion$ = items.map((item) =>
       this.productoService.obtenerProductoPorId(item.id, token).pipe(
         switchMap((producto: Producto) => {
@@ -36,25 +37,25 @@ export class VentasService {
           if (nuevoStock >= 0) {
             return of({ producto, nuevoStock });
           } else {
-            return throwError(
-              `Stock insuficiente para el producto ${producto.nombre}`
-            );
+            return throwError(() => new Error(
+              `Stock insuficiente para "${producto.nombre}". Disponible: ${producto.stock}, solicitado: ${item.cantidad}.`
+            ));
           }
         })
       )
     );
-
+  
     return forkJoin(stockVerificacion$).pipe(
       switchMap((productosActualizados) => {
         const actualizacionesStock$ = productosActualizados.map(({ producto, nuevoStock }) => {
           if (!producto.id) {
-            return throwError('El producto no tiene un ID válido.');
+            return throwError(() => new Error('El producto no tiene un ID válido.'));
           }
           return this.productoService.actualizarStock(producto.id, nuevoStock, token);
         });
-
+  
         const total = items.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
-
+  
         return forkJoin(actualizacionesStock$).pipe(
           switchMap(() => {
             const venta: Venta = {
@@ -62,7 +63,7 @@ export class VentasService {
               total,
               fecha: new Date(),
               tipoPago,
-              id_Usuario: token,
+              id_Usuario: token, // Usar el ID real del usuario
             };
             return this.guardarVenta(venta);
           })
@@ -70,11 +71,10 @@ export class VentasService {
       }),
       catchError((error) => {
         console.error('Error en la verificación de stock o en la venta:', error);
-        return throwError('Error al procesar la venta. Verifique el stock e intente nuevamente.');
+        return throwError(() => new Error('Error al procesar la venta. Verifique el stock e intente nuevamente.'));
       })
     );
   }
-
   private guardarVenta(venta: Venta): Observable<Venta> {
     return this.http.post<Venta>(this.apiUrl, venta);
   }

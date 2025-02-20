@@ -15,23 +15,26 @@ export class AuthService {
 
   registrarUsuario(usuario: Usuario): Observable<any> {
     return this.http.get<Usuario[]>(this.apiURL).pipe(
-      map((usuarios) => {
+      switchMap((usuarios) => {
         const existeUsuario = usuarios.some(
           (u) =>
-            u.email === usuario.email || u.cuit === usuario.cuit || u.nombreMercado === usuario.nombreMercado
+            u.email === usuario.email ||
+            u.cuit === usuario.cuit ||
+            u.nombreMercado === usuario.nombreMercado
         );
-
+  
         if (existeUsuario) {
           return throwError(() => new Error(
             'Ya existe un usuario con el mismo email, CUIT o nombre del mercado.'
           ));
         }
-        return usuario;
+  
+        return this.http.post<Usuario>(this.apiURL, usuario);
       }),
-      switchMap(() => this.http.post<Usuario>(this.apiURL, usuario)),
-      catchError((error) => throwError(error))
+      catchError((error) => throwError(() => new Error(error.message || 'Error al registrar el usuario')))
     );
   }
+  
 
   iniciarSesion(email: string, password: string): Observable<Usuario> {
     return this.http.get<Usuario[]>(this.apiURL, { params: { email } }).pipe(

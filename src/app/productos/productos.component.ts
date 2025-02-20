@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../service/product/product/productos.service';
 import { Producto } from './producto.model';
 import { AuthService } from '../service/product/Auth/usarios.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmacionDialogoComponent } from '../shared/components/confirmacion-dialogo/confirmacion-dialogo.component';
+
 
 @Component({
   selector: 'app-productos',
@@ -21,7 +24,7 @@ export class ProductoComponent implements OnInit {
 
   criterioBusqueda: Partial<Producto> = { id: undefined, nombre: '', categoria: '' };
 
-  constructor(private productoService: ProductoService, private authService: AuthService) {}
+  constructor(private productoService: ProductoService, private authService: AuthService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.listarProductos();
@@ -39,41 +42,42 @@ export class ProductoComponent implements OnInit {
 
   agregarProducto() {
     if (this.formularioValido()) {
-      const idUsuario = this.authService.obtenerToken(); // Obtén el ID del usuario actual
-  
+      const idUsuario = this.authService.obtenerToken();
       if (!idUsuario) {
         console.error('Error: No se pudo obtener el ID del usuario desde el token.');
         return;
       }
   
-      
+      this.productoService.buscarProductoPorNombreYUsuario(this.producto.nombre, idUsuario).subscribe({
+        next: (productosConNombre) => {
+          if (productosConNombre.length > 0) {
+            console.error('Error: Ya existe un producto con el mismo nombre para este usuario.');
+            return;
+          }
   
-      // Validación de ID único para este usuario
-      
-          // Validación de nombre único para este usuario
-          this.productoService.buscarProductoPorNombreYUsuario(this.producto.nombre, idUsuario).subscribe({
-            next: (productosConNombre) => {
-              if (productosConNombre.length > 0) {
-                console.error('Error: Ya existe un producto con el mismo nombre para este usuario.');
-                return;
+          const nuevoProducto = { ...this.producto };
+          delete nuevoProducto.id; // Eliminar el ID antes de enviar la solicitud
+  
+          this.productoService.agregarProducto(nuevoProducto).subscribe({
+            next: (productoCreado) => {
+              if (productoCreado.id) {
+                this.listarProductos();
+                this.resetForm();
+              } else {
+                console.error('Error: El producto creado no tiene un ID válido.');
               }
-  
-              // Si pasa las validaciones, agregar producto
-              this.productoService.agregarProducto(this.producto).subscribe({
-                next: (productoCreado) => {
-                  this.productos.push(productoCreado);
-                  this.resetForm();
-                },
-                error: (error) => console.error('Error al agregar producto:', error),
-              });
             },
-            error: (error) => console.error('Error al buscar producto por nombre:', error),
+            error: (error) => console.error('Error al agregar producto:', error),
           });
-        
+        },
+        error: (error) => console.error('Error al buscar producto por nombre:', error),
+      });
     } else {
       console.error('Error: Complete todos los campos correctamente.');
     }
   }
+  
+  
   
   
   verificarStockBajo() {
@@ -117,14 +121,23 @@ export class ProductoComponent implements OnInit {
   }
   
   eliminarProducto(producto: Producto) {
-    if (!producto.id)
-      {
-        console.log("error al seleccionar producto")
-        return
+    if (!producto.id) {
+      console.log("Error al seleccionar producto");
+      return;
+    }
+  
+    const dialogRef = this.dialog.open(ConfirmacionDialogoComponent, {
+      width: '350px',
+      data: { mensaje: '¿Estás seguro de que quieres eliminar este producto?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(resultado => {
+      if (resultado && producto.id) {
+        this.productoService.eliminarProducto(producto.id).subscribe({
+          next: () => this.listarProductos(),
+          error: (error) => console.error('Error al eliminar producto:', error)
+        });
       }
-    this.productoService.eliminarProducto(producto.id).subscribe({
-      next: () => this.listarProductos(),
-      error: (error) => console.error('Error al eliminar producto:', error)
     });
   }
   cerrarModal() {

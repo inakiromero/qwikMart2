@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarioService } from '../service/product/calendario/calendario-service.service';
 import { Evento } from './calendario.model';
 import { AuthService } from '../service/product/Auth/usarios.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmacionDialogoComponent } from '../shared/components/confirmacion-dialogo/confirmacion-dialogo.component';
+
 
 
 @Component({
@@ -17,7 +20,7 @@ export class CalendarioComponent implements OnInit {
     descripcion: '',
     id_usuario: '', // Este valor se establecerá según el usuario autenticado
   };
-  constructor(private calendarioService: CalendarioService,private authService: AuthService) {}
+  constructor(private calendarioService: CalendarioService,private authService: AuthService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.cargarEventos();
@@ -56,16 +59,22 @@ export class CalendarioComponent implements OnInit {
   
 
   eliminarEvento(id: string): void {
-    this.calendarioService.eliminarEvento(id).subscribe({
-      next: () => {
-        this.eventos = this.eventos.filter((evento) => evento.id !== id);
-      },
-      error: (err) => {
-        console.error('Error al eliminar evento:', err);
-      },
+    const dialogRef = this.dialog.open(ConfirmacionDialogoComponent, {
+      width: '350px',
+      data: { mensaje: '¿Estás seguro de que quieres eliminar este evento?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(resultado => {
+      if (resultado) {
+        this.calendarioService.eliminarEvento(id).subscribe({
+          next: () => {
+            this.eventos = this.eventos.filter((evento) => evento.id !== id);
+          },
+          error: (err) => console.error('Error al eliminar evento:', err)
+        });
+      }
     });
   }
-
 esMismoDia(evento: Evento): boolean {
   const hoy = new Date();
   const fechaEvento = new Date(evento.fecha);

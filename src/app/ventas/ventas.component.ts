@@ -14,7 +14,8 @@ export class VentasComponent {
   ventaItems: VentaItem[] = [];
   busquedaRealizada: boolean = false; 
   tipoPago: 'Efectivo' | 'Tarjeta' | 'Transferencia QR' | '' = ''; // Inicializado vacío
-
+  mensajeErrorStock: string = '';
+  mensajeErrorPago: string = '';
   constructor(private productoService: ProductoService, private ventasService: VentasService) {}
 
   buscarProducto(valorBusqueda: string): void {
@@ -66,11 +67,17 @@ export class VentasComponent {
   }
 
   procesarVenta(): void {
+
+    
+    this.mensajeErrorPago = ''; // Limpiar mensaje previo
+
     if (!this.tipoPago) {
       console.error('Seleccione un tipo de pago.');
+      this.mensajeErrorPago = 'Seleccione un tipo de pago.';
       return;
     }
   
+    this.mensajeErrorStock = ''; // Limpiar el mensaje previo
     const venta = {
       items: this.ventaItems,
       fecha: new Date().toISOString(),
@@ -78,18 +85,19 @@ export class VentasComponent {
       tipoPago: this.tipoPago
     };
   
-    this.ventasService.registrarVenta(this.ventaItems,this.tipoPago).subscribe({
+    this.ventasService.registrarVenta(this.ventaItems, this.tipoPago).subscribe({
       next: (respuesta) => {
         console.log('Venta realizada:', respuesta);
         this.abrirVentanaTicket();
         this.ventaItems = [];
-        this.tipoPago = ''; // Resetea el tipo de pago
+        this.tipoPago = ''; 
       },
-      error: (error) => console.error('Error al registrar la venta:', error)
+      error: (error) => {
+        console.error('Error al registrar la venta:', error);
+        this.mensajeErrorStock = error; // Mostrar el mensaje de error en la pantalla
+      }
     });
   }
-  
-
   abrirVentanaTicket(): void {
     if (!this.ventaItems || this.ventaItems.length === 0) {
       console.error('No hay productos para generar el ticket.');
