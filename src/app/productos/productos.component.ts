@@ -175,6 +175,8 @@ export class ProductoComponent implements OnInit {
             next: () => {
               console.log(`Stock actualizado para el producto ID ${this.productoId}`);
               this.listarProductos();
+              this.productoId = '';
+              this.cantidadStock = 0;
             },
             error: (error) => console.error('Error al actualizar stock:', error),
           });
